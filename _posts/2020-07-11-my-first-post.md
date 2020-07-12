@@ -12,6 +12,7 @@ Hier trage ich meine Notizen, Anleitungen und Software zu verschiedenen Themen u
 * Python
 * Lego
 * Linux
+* Gnampf
 
 Für dieses Blog nutze ich [Jekyll](https://jekyllrb.com). Eine gute Einführung zu Github Pages und Jekyll findet man in dieser [Youtube-Playlist](
 https://www.youtube.com/watch?v=EvYs1idcGnM&list=PLWzwUIYZpnJuT0sH4BN56P5oWTdHJiTNq). Danach bin ich bei der Erstellung dieses Blogs vorgegangen. Jekyll verwendet die Template-Sprache [Liquid](https://jekyllrb.com/docs/liquid/).
