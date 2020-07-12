@@ -32,7 +32,7 @@ author: Kitty
 
 # Eigene Felder
 copyright: Kein Urheberrechtsschutz
-title-logo: /images/tux-yay2.png
+title_logo: /images/tux-yay2.png
 
 # Build settings
 # Removed minima theme as it is now a regular theme

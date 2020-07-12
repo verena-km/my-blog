@@ -25,7 +25,7 @@ layout: default
           {% assign tags = page.tags %}
         {% endif %}
         {% for tag in tags %}
-        <a href="{{site.baseurl}}/tags/#{{tag|slugify}}">{{tag}}</a>
+        <a href="{{site.baseurl}}/tags/#{{tag|slugify}}">{{tag | capitalize}}</a>
         {% unless forloop.last %}&nbsp;{% endunless %}
         {% endfor %}       
       </div>

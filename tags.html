@@ -1,8 +1,17 @@
 ---
 layout: page
 permalink: /tags/
-title: Tags
+title: Themen
 ---
+
+<div class="post-tags">
+  {% for tag in site.tags %}
+      {% capture tag_name %}{{ tag | first }}{% endcapture %}
+      <a href="{{site.baseurl}}/tags/#{{tag| first |slugify}}">{{ tag_name | capitalize }}  ({{site.tags[tag_name].size}}) </a>
+      {% unless forloop.last %}&nbsp;{% endunless %}
+  {% endfor %}
+</div>
+
 
 
 <div id="archives">
@@ -12,11 +21,11 @@ title: Tags
     <div id="#{{ tag_name | slugify }}"></div>
     <p></p>
 
-    <h3 class="tag-head">{{ tag_name }}</h3>
+    <h3 class="tag-head">{{ tag_name | capitalize }}</h3>
     <a name="{{ tag_name | slugify }}"></a>
     {% for post in site.tags[tag_name] %}
     <article class="archive-item">
-      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
+      <a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a>
     </article>
     {% endfor %}
   </div>

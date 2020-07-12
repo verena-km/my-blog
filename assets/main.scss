@@ -3,3 +3,10 @@
 ---
 
 @import "minima";
+
+.post-tags a {
+    border-radius: 10px;
+    background: rgba(194, 212, 226, 0.705);
+    padding: 5px; 
+    font-size: 80%;
+}

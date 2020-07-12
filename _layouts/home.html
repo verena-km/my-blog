@@ -21,6 +21,17 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
+        <div class="post-tags">
+          {% if post %}
+            {% assign tags = post.tags %}
+          {% else %}
+            {% assign tags = page.tags %}
+          {% endif %}
+          {% for tag in tags %}
+          <a href="{{site.baseurl}}/tags/#{{tag|slugify}}">{{tag | capitalize}}</a>
+          {% unless forloop.last %}&nbsp;{% endunless %}
+          {% endfor %}       
+        </div>
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
