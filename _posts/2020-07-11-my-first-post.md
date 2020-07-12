@@ -2,7 +2,7 @@
 layout: post
 title:  "Willkommen in meinem Blog"
 date:   2020-07-11 10:08:49 +0200
-categories: jekyll markdown
+tags: jekyll markdown
 ---
 
 
