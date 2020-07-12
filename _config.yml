@@ -27,6 +27,13 @@ url: "https://verena-km.github.io" # the base hostname & protocol for your site,
 #twitter_username: jekyllrb
 #github_username:  jekyll
 
+# Weitere Felder aus dem  minima Theme
+author: Kitty
+
+# Eigene Felder
+copyright: Kein Urheberrechtsschutz
+title-logo: /images/tux-yay2.png
+
 # Build settings
 # Removed minima theme as it is now a regular theme
 # theme: minima

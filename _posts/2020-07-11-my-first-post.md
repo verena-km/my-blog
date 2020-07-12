@@ -1,24 +1,22 @@
 ---
 layout: post
-title:  "Mein erster Post"
+title:  "Willkommen in meinem Blog"
 date:   2020-07-11 10:08:49 +0200
 categories: jekyll markdown
 ---
 
 
-## Wozu dieses Blog?
+Hier trage ich meine Notizen, Anleitungen und Software zu verschiedenen Themen und kleineren Projekten zusammen. Themenschwerkpunkte werden sein:
+* Raspberry Pi
+* Calliope
+* Python
+* Lego
+* Linux
 
-Ich habe mich entschlossen meine Notizen, Anleitungen und Software zu verschiedenen Themen und kleineren Projekten mit git zu verwalten und auf Github zu veröffentlichen. Hierzu dient auch dieses Blog. 
+Für dieses Blog nutze ich [Jekyll](https://jekyllrb.com). Eine gute Einführung zu Github Pages und Jekyll findet man in dieser [Youtube-Playlist](
+https://www.youtube.com/watch?v=EvYs1idcGnM&list=PLWzwUIYZpnJuT0sH4BN56P5oWTdHJiTNq). Danach bin ich bei der Erstellung dieses Blogs vorgegangen. Jekyll verwendet die Template-Sprache [Liquid](https://jekyllrb.com/docs/liquid/).
 
-## Verwendung von Jekyll
+Bei der Nutzung von Kategorien hab ich mich an diesem [Youtube-Video](https://www.youtube.com/watch?v=QvmiDvJF0KA) orientiert.
 
-Für dieses Blog nutze ich [Jekyll](https://jekyllrb.com). Eine super Einführung findet sich in dieser [Videoreihe](
-https://www.youtube.com/watch?v=EvYs1idcGnM&list=PLWzwUIYZpnJuT0sH4BN56P5oWTdHJiTNq).
-
-
-## Verwendung von Markdown 
-
-In Jekyll schreibt man die Inhalte in Markdown.
-
-Eine Anleitung und Beispiele zur Verwendung von Markdown findet man hier:
+Die Inhalte in Jekyll schreibt man in Markdown. Eine Anleitung und Beispiele zur Verwendung von Markdown findet man hier:
 [https://guides.github.com/features/mastering-markdown](https://guides.github.com/features/mastering-markdown/)
