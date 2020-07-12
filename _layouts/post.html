@@ -18,19 +18,6 @@ layout: default
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
       {%- endif -%}
 
-
-      <div class="post-categories">
-        {% if post %}
-          {% assign categories = post.categories %}
-        {% else %}
-          {% assign categories = page.categories %}
-        {% endif %}
-        {% for category in categories %}
-        <a href="{{site.baseurl}}/categories/#{{category|slugify}}">{{category}}</a>
-        {% unless forloop.last %}&nbsp;{% endunless %}
-        {% endfor %}       
-      </div>
-
       <div class="post-tags">
         {% if post %}
           {% assign tags = post.tags %}
@@ -45,8 +32,6 @@ layout: default
     
     </p>
   </header>
-
-
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
