@@ -34,7 +34,7 @@ minima:
   date_format: "%d.%m.%Y"
 
 # Eigene Felder
-copyright: Kein Urheberrechtsschutz
+#copyright: Kein Urheberrechtsschutz
 title_logo: /images/tux-yay2.png
 
 # Build settings
