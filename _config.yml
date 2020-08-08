@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Kittys Tech Blog
-email: kitty@example.com
+email: kitty@kittytech.de
 description: >- # this means to ignore newlines until "baseurl:"
   Anleitungen zu Python, Raspberry Pi, Calliope, Lego und mehr.
 baseurl: "/my-blog" # the subpath of your site, e.g. /blog
@@ -29,6 +29,9 @@ url: "https://verena-km.github.io" # the base hostname & protocol for your site,
 
 # Weitere Felder aus dem  minima Theme
 author: Kitty
+
+minima:
+  date_format: "%d.%m.%Y"
 
 # Eigene Felder
 copyright: Kein Urheberrechtsschutz
