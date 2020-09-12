@@ -12,10 +12,10 @@ In diesem Blog trage ich meine Notizen, Anleitungen und Software zu verschiedene
 * Lego
 * Linux
 
-Als Technik für dieses Blog nutze ich Github Pages und [Jekyll](https://jekyllrb.com). Eine gute Einführung zu Github Pages und Jekyll findet man in dieser [Youtube-Playlist](
+Als Technik für dieses Blog nutze ich Github Pages und [Jekyll](https://jekyllrb.com). Eine gute Einführung zu Github Pages und Jekyll gibt es in dieser [Youtube-Playlist](
 https://www.youtube.com/watch?v=EvYs1idcGnM&list=PLWzwUIYZpnJuT0sH4BN56P5oWTdHJiTNq). Danach bin ich bei der Erstellung dieses Blogs vorgegangen. Jekyll verwendet die Template-Sprache [Liquid](https://jekyllrb.com/docs/liquid/).
 
 Bei der Nutzung von Kategorien hab ich mich an diesem [Youtube-Video](https://www.youtube.com/watch?v=QvmiDvJF0KA) orientiert.
 
-Die Inhalte in Jekyll schreibt man in Markdown. Eine Anleitung und Beispiele zur Verwendung von Markdown findet man hier:
+Die Inhalte in Jekyll schreibt man in Markdown. Eine Anleitung und Beispiele zur Verwendung von Markdown findet Ihr hier:
 [https://guides.github.com/features/mastering-markdown](https://guides.github.com/features/mastering-markdown/)
