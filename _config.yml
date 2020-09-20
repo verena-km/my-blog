@@ -22,7 +22,7 @@ title: Kittys Tech Blog
 email: kitty@kittytech.de
 description: >- # this means to ignore newlines until "baseurl:"
   Anleitungen zu Python, Raspberry Pi, Calliope, Lego und mehr.
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.kittytech.de" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 #github_username:  jekyll
