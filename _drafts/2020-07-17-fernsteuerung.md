@@ -13,7 +13,7 @@ Für die Fernsteuerung eines Microcontrollers und des damit gesteuerten Fahrzeug
 
 # Fernsteuerung über Bluetooth / Funk
 
-Der Callipe verfügt über Bluetooth, der Rasberry Pi ebenfalls (ab Model 3B). Den Arduino kann man mit einem entsprechenden Shield nachrüsten. Da auch Smartphones über Bluetooth verfügen, liegt die Idee nahe, das Fahrzeug von Smartphone aus über Bluetooth zu steuern. Entsprechende Apps machen dies möglich.
+Der Calliope verfügt über Bluetooth, der Rasberry Pi ebenfalls (ab Model 3B). Den Arduino kann man mit einem entsprechenden Shield nachrüsten. Da auch Smartphones über Bluetooth verfügen, liegt die Idee nahe, das Fahrzeug von Smartphone aus über Bluetooth zu steuern. Entsprechende Apps machen dies möglich.
 
 Eine Alternative ist es, einen anderen Microcontroller als "Fernbedienung" zu verwenden. Beim Calliope bietet sich dass an, da er über einen Beschleunigungssensor und zwei Taster verfügt, was man gut für die Fernsteuerung verwenden kann.
 
@@ -39,7 +39,7 @@ Auch für den Calliope gibt es eine Möglichkeit einen IR-Empänger über Seeed 
 
 # Akustische Steuerung / Sprachsteuerung
 
-Im Calliope ist ein Microfon verbaut, dass die Stärke der Umgebungsgeräusche aufnehmen kann. Darüber könnte man eine einfache Steuerung realisieren, z.B. über Klasch-Signale.
+Im Calliope ist ein Mikrofon verbaut, dass die Stärke der Umgebungsgeräusche aufnehmen kann. Darüber könnte man eine einfache Steuerung realisieren, z.B. über Klasch-Signale.
 
 Weitergehende Möglichkeiten wird vor allem der Raspi bieten - das ist dann aber ein extra Thema.
 

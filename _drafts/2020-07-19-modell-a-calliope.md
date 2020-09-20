@@ -132,7 +132,7 @@ Man kann die Werte durch Tests ermitteln, indem man die Geschwindigkeit in Stufe
 
 Wir haben nun zwar die Mögichkeit, das Fahrzeug vorwärts zu bewegen und zu drehen, die Bewegungen lassen sich jedoch nicht genau kontrollieren. Befehle wie "Fahre genau 1 Meter weit" oder "Drehe um 90° nach rechts" sind bislang noch nicht möglich.
 
-Hierfür könneten die erforderlichen Werte mit initialen Messungen ermittelt werden:
+Hierfür könnten die erforderlichen Werte mit initialen Messungen ermittelt werden:
 
 Wie weit fährt das Fahrzeug in x Sekunden?
 Um wieviel Grad dreht das Fahrzeug in x Sekunden?
@@ -150,5 +150,6 @@ Neben diesen einmaligen manuellen Messungen gibt es aber auch die Möglichkeit, 
 Mit einem Encoder können die Umdrehungen des Motors gezählt und damit die Geschwindigkeit berechnet werden, siehe
 https://www.youtube.com/watch?v=cLtMcqRetO0
 https://www.youtube.com/watch?v=oLBYHbLO8W0
+https://www.youtube.com/watch?v=AHOvk3JVwVc
 
 Ein Beschleunigungs- und Lagesensor bzw. Kompass kann verwendet werden um Drehungen oder sonstige Bewegungen im Raum auszuwerten. Ein derartiger Sensor ist im Calliope enthalten.

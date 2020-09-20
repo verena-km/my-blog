@@ -2,7 +2,7 @@
 layout: post
 title:  "Calliope - Programmierung"
 date:   2020-07-19 15:08:49 +0200
-tags: calliope makecode 
+tags: calliope makecode debugging seriell
 ---
 
 # Editoren
@@ -27,6 +27,12 @@ https://github.com/microsoft/pxt-calliope
 In Makecode kann man von einer Block-Ansicht in eine Javascript-Ansicht wechseln, in der neusten Beta-Version auch in eine Python-Ansicht.
 
 Die neue Beta-Version von Makecode bietet auch die Möglichkeit für den Code ein Github-Repository anzulegen.
+
+## Open Roberta Lab
+
+[Open Roberta Lab] (https://lab.open-roberta.org/) ist eine vom Fraunhofer IAIS entwickelte webbasierte Programmierumgebung. Mit Open Roberta Lab kann man neben dem Calliope auch [weitere "Roboter"] (https://www.roberta-home.de/kids/die-roboter/) programmieren.
+
+
 
 # Debugging über serielle Schnittstelle
 

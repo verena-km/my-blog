@@ -86,7 +86,7 @@ Der [Wikipedia-Artikel zu Roll-Nick-Gier-Winkel](https://de.wikipedia.org/wiki/R
 
 Mit dem Rotations-Befehl des Calliope erhalten wir Werte zum "Winkel/Nicken (Pitch)" und zum "Rollen (Roll)". 
 
-Der Wert "Winkel/Nicken(Pitch)" verändert sich, wenn man die Spitze nach oben bzw. unten dreht:
+Der Wert "Winkel/Nicken(Pitch)" verändert sich, wenn man die Spitze nach oben bzw. unten dreht. Blöderweise erhält man je nach genutzter Entwicklungsumgebung unterschiedliche Werte:
 
 Bei Makecode:
 * liegend (LED nach oben): pitch = 0°
@@ -146,56 +146,8 @@ Gleiches machen wir für die Geschwindigkeit:
 0% = 0
 100% = 100
 
-let richtung = 0
-let geschwindigkeit = 0
-radio.setGroup(10)
-basic.forever(function () {
-    serial.writeString("Beschleunigung: ")
-    serial.writeNumber(input.acceleration(Dimension.X))
-    serial.writeString(" ")
-    serial.writeNumber(input.acceleration(Dimension.Y))
-    serial.writeString(" ")
-    serial.writeNumber(input.acceleration(Dimension.Z))
-    serial.writeString(" ")
-    serial.writeNumber(input.acceleration(Dimension.Strength))
-    serial.writeString(" Rotation: ")
-    serial.writeNumber(input.rotation(Rotation.Pitch))
-    serial.writeString(" ")
-    serial.writeNumber(input.rotation(Rotation.Roll))
-    serial.writeLine("")
-    if (input.rotation(Rotation.Pitch) < 0) {
-        geschwindigkeit = 100
-    }
-    if (input.rotation(Rotation.Pitch) > 90) {
-        geschwindigkeit = 0
-    }
-    if (input.rotation(Rotation.Pitch) >= 0 && input.rotation(Rotation.Pitch) <= 90) {
-        geschwindigkeit = pins.map(
-        input.rotation(Rotation.Pitch),
-        90,
-        0,
-        0,
-        100
-        )
-    }
-    if (input.rotation(Rotation.Roll) >= -90 && input.rotation(Rotation.Roll) <= 90) {
-        richtung = pins.map(
-        input.rotation(Rotation.Roll),
-        -90,
-        90,
-        -100,
-        100
-        )
-    }
-    serial.writeValue("richtung", Math.round(richtung))
-    serial.writeValue("geschwindigkeit", Math.round(geschwindigkeit))
-    radio.sendValue("richtung", Math.round(richtung))
-    radio.sendValue("geschwindigkeit", Math.round(geschwindigkeit))
-    basic.pause(1000)
-})
-
-
-
+Hier das Programm für den Sender-Calliope (Fernbedienung):
+```javascript
 let richtung = 0
 let geschwindigkeit = 0
 radio.setGroup(10)
@@ -243,8 +195,10 @@ basic.forever(function () {
     radio.sendValue("geschwindigkeit", Math.round(geschwindigkeit))
     basic.pause(200)
 })
+```
 
-
+Das folgende Programm läuft auf dem Empfänger (Robbi):
+```javascript
 radio.onReceivedValue(function (name, value) {
     serial.writeValue(name, value)
     if (name == "richtung") {
@@ -267,3 +221,4 @@ let richtung = 0
 radio.setGroup(10)
 motors.dualMotorPower(Motor.A, 0)
 motors.dualMotorPower(Motor.B, 0)
+```

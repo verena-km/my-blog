@@ -7,16 +7,15 @@ tags: calliope pinout sensor
 
 Infos zum Calliope gibt es unter [http://https://calliope.cc](http://https://calliope.cc)
 
-## Aktoren
-
+Der Calliope hat die folgenden Aktoren integriert:
 * LED-Matrix
 * Farb-LED
 * Tonausgabe
 
-## Sensoren
+Zudem enthält er die folgenden sensoren
 * Tasten A / B
-* PIN 0 bis 3
-* Lage
+* PIN 0 bis 3 an den "Ecken"
+* Lage / Beschleunigung
 * Kompass
 * Mikrofon
 * Temperatur
@@ -35,9 +34,13 @@ C16 und C17
 Nach Deaktivierung der LED  sind zusätzlich nutzbar:
 C4 - C12
 
-Um die 6 Motorpins und die darunterliegenden 26 weiteren Pins mit Jumperkabeln zu nutzen ist es hilfreich, an die "Löcher" eine Pinleiste anzulöten.
+Von folgende Pins können statt digitalen Werten auch analoge Werte gelesen werden:
+P1, P2, C4, C5, C6, C16 und C17
 
-((Bild Calliope ohne / mit Pinleiste))
+
+Um die 6 Motorpins und die darunterliegenden 26 weiteren Pins mit Jumperkabeln zu nutzen ist es hilfreich,an die "Löcher" eine Pinleiste anzulöten.
+
+![Calliope Mini](/images/foto_zwei_calliope.jpg) 
 
 ## Motortreiber des Callipe mini
 
@@ -53,8 +56,14 @@ Im sogenannten Einmotorenbetrieb schließt man den Motor wie folgt an:
 * die externe Spannungsquelle (bis 9V) wird mit dem fünften Motorpin von links
 * Ground der externen Spannungsquelle wird mit dem sechsten Motorpin von links verbunden.
 
+((TODO: Fritzing / Foto machen))
+
 Im sogenannten Zweimotorenbetrieb sieht das ganze dann so aus:
-* Motor A wird mit Pin für Motor A und Ground verbunden (Motorpins 3 und vi4er)
+* Motor A wird mit Pin für Motor A und Ground verbunden (Motorpins 3 und vier)
 * Motor B wird mit Pin für Motor B und Ground verbunden (Motorpins)
 * die externe Spannungsquelle (bis 9V) wird mit dem fünften Motorpin von links
 * Ground der externen Spannungsquelle wird mit dem sechsten Motorpin von links verbunden.
+
+((TODO:Fritzing / Foto machen))
+
+Im Einmotorenbetrieb kann man den Motor so programmieren, dass er sich vorwärts oder rückwärts dreht. Im Zweimotorenbetrieb drehen sich die beiden Motoren immer nur vorwärts.

@@ -14,17 +14,20 @@ Für die Bewegung des Roboters sind als "Aktor" vor allem Motoren wichtig. Bei d
 
 Gleichstrommotoren haben zwei Anschlüsse und drehen sich, wenn sie mit einer Spannungsquelle verbunden werden. Ändert man die Pole drehen sie sich in die andrere Richtung. Ich verwende die Lego M- bzw. L-Motoren.
 
+((Foto Lego Motoren))
+
 Servomotoren kann man so ansteuern, dass sie eine bestimmte Winkelpositon einnehmen. Ich verwende einen einfachen Micro-Servomotor
 * an den ich mit Heißkleber an zwei Seiten Lego-Platten 2x3 geklebt habe und
 * an den ich oben eine 2x2-Platte geschraubt habe.
+
+![Foto Servo-Motor](/images/foto_servo.jpg) 
 
 Er hat drei Anschlüsse:
 * 5 V - Versorgungsspannung
 * Ground
 * PWM-Signal für Positionierung
 
-Schrittmotor hab ich bislang noch nicht eingesetzt
-
+Den Schrittmotor hab ich bislang noch nicht eingesetzt.
 
 ## Sensoren
 
