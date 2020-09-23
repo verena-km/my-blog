@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Möglichkeiten zur Fernsteuerung"
-date:   2020-07-17 21:08:49 +0200
-tags: Fernsteuerung 
+date:   2020-09-15 
+tags: Fernsteuerung Bluetooth WLAN Infrarot 
 ---
 
 Für die Fernsteuerung eines Microcontrollers und des damit gesteuerten Fahrzeugs bieten sich folgende Möglichkeiten an:
@@ -27,9 +27,9 @@ Man kann dann entweder:
 * ein vorhandenes WLAN nutzen oder 
 * der RaspberryPi stellt eines zur Verfügung, in das sich dann das fernsteuernde Gerät (z. B. Smartphone) einbuchen kann.
 
-Für die Fernsteuerung kann dann der Raspi beispielsweise ein Web-Interface bereitstellen, auf das mit einem Browser vom Smartphone aus zugegriffen werden kann.
+Für die Fernsteuerung kann dann der Raspi beispielsweise ein Web-Interface bereitstellen, auf das mit einem Browser vom Smartphone aus zugegriffen werden kann. Eine Möglichkeit, dies technisch zu realisieren, ist über das Python-Webframework Flask.
 
-Eine Möglichkeit, dies technisch zu realisieren, ist über das Python-Webframework Flask.
+Mit zusätzlicher Hardware können auch der Calliope und der Arduino WLAN-Verbindungen aufbauen.
 
 # Nutzung einer Infrarot-Fernbedienung
 

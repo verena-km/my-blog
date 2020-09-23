@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Stromversorgung"
-date:   2020-07-15 22:08:49 +0200
-tags: Stromversorgung
+title:  "Stromversorgung des Roboterfahrzeugs"
+date:   2020-09-12 9:00:00 +0200
+tags: Stromversorgung Step-Down-Konverter Lego-Kabel
 ---
 
 Der Roboter und damit sowohl das genutzte Board sowie die weiteren genutzten Komponenten benötigen eine passende Stromversorgung.
