@@ -2,10 +2,10 @@
 layout: post
 title:  "Erster Prototyp mit Calliope"
 date:   2020-09-18
-tags: calliope Modell-A
+tags: calliope Beispielfahrzeug
 ---
 
-((TODO Foto))
+![Beispielfahrzeug zwei Antriebsräder und Stützrad mit Callipe](/images/foto_modell_a_calliope.jpg)
 
 Für den ersten Prototyp nehme ich den Calliope und dessen integrierten Motortreiber. Das Fahrzeug hat zwei angetriebene Räder und ein Stützrad. Aufgrund der Einschränkungen des Calliope-Motortreibers gibt es leider keinen Rückwärtsgang.
 
@@ -55,6 +55,8 @@ input.onButtonPressed(Button.A, () => {
     motors.dualMotorPower(Motor.B, 0)
 })
 ```
+
+Anmerkung: Künftig werde ich hier nur noch den Javascript-Code zeigen. Wenn man diesen nach Makecode in die Ansicht "Javascript" kopiert kann man sich anschließend die grafische Darstellung anschauen, indem man zu "Blöcke" wechselt.
 
 ### Nutzung von Funktionen
 
@@ -124,9 +126,9 @@ Im obigen Beispiel wurde die Geschwindigkeit der Motoren immer auf 100% gesetzt.
 
 Zu beachten ist, dass sich die Motoren erst ab einem bestimmten Wert drehen, und dass erst ab einem noch höheren Wert das Fahrzeug aus dem Stand heraus gestartet werden kann.
 
-Welche Werte das sind, hängt vom verwendeten Motor (Drehmoment, Drehzahl), von ggf. verwendeten Zahnrädernm, von den verwendeten Rädern und auch von den Eigenschaften des Untergrunds ab.
+Welche Werte das sind, hängt vom verwendeten Motor (Drehmoment, Drehzahl), von ggf. verwendeten Zahnrädern, von den verwendeten Rädern und auch von den Eigenschaften des Untergrunds sowie von der am Motor anliegenden Spannung ab.
 
-Man kann die Werte durch Tests ermitteln, indem man die Geschwindigkeit in Stufen von 0 bis 100 erhöht, bzw. reduziert.
+Man kann die Werte durch Tests ermitteln, indem man die Geschwindigkeit in Stufen von 0 bis 100 erhöht.
 
 ```javascript
 input.onButtonPressed(Button.A, function () {
@@ -235,7 +237,7 @@ input.onButtonPressed(Button.B, function () {
 
 })
 ```
-Die Funktionen werden in diesem Beispielprogramm genutzt um beim Drücken von A ein Quadrat und bei Drücken von B ein gleichseitiges Dreieck abzufahren.
+Die Funktionen werden in diesem Beispielprogramm genutzt, um beim Drücken von A ein Quadrat und bei Drücken von B ein gleichseitiges Dreieck abzufahren.
 
 Nachteil dieser Vorgehensweise ist, dass sich die Motoren bei sinkender Batteriespannung langsamer drehen und damit die initiale Messung nicht mehr gültig ist. 
 
