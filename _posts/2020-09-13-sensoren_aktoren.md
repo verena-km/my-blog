@@ -2,7 +2,7 @@
 layout: post
 title:  'Sensoren und Aktoren des Roboterfahrzeugs'
 date:   2020-09-13 09:00:00 +0200
-tags: motor sensor
+tags: Motor Sensor Roboter
 ---
 
 ## Motoren

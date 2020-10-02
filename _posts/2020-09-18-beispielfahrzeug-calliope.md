@@ -2,7 +2,7 @@
 layout: post
 title:  "Erster Prototyp mit Calliope"
 date:   2020-09-18
-tags: calliope Beispielfahrzeug
+tags: Calliope Beispielfahrzeug
 ---
 
 ![Beispielfahrzeug zwei Antriebsräder und Stützrad mit Callipe](/images/foto_modell_a_calliope.jpg)

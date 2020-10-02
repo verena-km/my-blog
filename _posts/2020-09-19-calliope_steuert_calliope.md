@@ -2,7 +2,7 @@
 layout: post
 title:  "Calliope steuert Calliope"
 date:   2020-09-19
-tags: calliope fernsteuerung funk beispielfahrzeug
+tags: Calliope Fernsteuerung Funk Beispielfahrzeug
 ---
 Der Prototyp mit Calliope soll nun mit einem anderen Calliope ferngesteuert werden.
 Hierfür nutzen wir das Funk-Modul, mit dem aus mehreren Calliopes (und auch Microbits) eine Funkgruppe gebildet werden kann. Jeder in der Funkgruppe kann dann Daten (Text oder Zahlen) senden und empfangen.

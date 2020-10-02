@@ -2,7 +2,7 @@
 layout: post
 title:  "Calliope Hardware und Pins"
 date:   2020-09-16 
-tags: calliope pinout sensor motor
+tags: Calliope Pinout Sensor Motor Pinout
 ---
 
 Infos zum Calliope gibt es unter [https://calliope.cc](https://calliope.cc)

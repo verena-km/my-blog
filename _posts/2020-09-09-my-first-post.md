@@ -2,7 +2,7 @@
 layout: post
 title:  "Willkommen in meinem Blog"
 date:   2020-09-09 9:00:00 +0200
-tags: welcome jekyll markdown
+tags: Welcome Jekyll 
 ---
 
 In diesem Blog trage ich meine Notizen, Anleitungen und Software zu verschiedenen Themen und kleineren Projekten zusammen. Einerseits dient das als Dokumentation für mich selbst, anderseits freue ich mich, wenn es auch für andere nützlich ist. Themenschwerpunkte sind:

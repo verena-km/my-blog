@@ -85,6 +85,4 @@ Die verschachtelte Schleife geht dreimal die Liste der Farben durch und färbt a
 Linksammlung:
 https://randomnerdtutorials.com/micropython-ws2812b-addressable-rgb-leds-neopixel-esp32-esp8266/
 https://docs.micropython.org/en/latest/esp32/quickref.html#neopixel-driver 
-
-
 https://www.instructables.com/id/13-Ideas-for-Diffusing-LEDs/
