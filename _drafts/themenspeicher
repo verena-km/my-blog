@@ -11,15 +11,16 @@ Calliope Klatsch-steuerung
 Lego Motor71427c01
 
 Infrarot Abstandssensor z.B. TCRT5000 
-Bewegungsssensor
-Potentiometer
+Bewegungsssensor - Pir-Sensor
+Fotowiderstand
+Potentiometer - Poti
 LCD-Display
 RFID-Kit
 
 Abstandssensor:
 * Ultraschall
 * Infrarot
-* Time of flight VL6180X
+* Time of flight VL6180X / VLS3L1X
 
 Farbsensor TCS3200 
 
@@ -37,10 +38,11 @@ Weitere Bauteile:
 * Infrarot Abstandssensor TCRT5000
 * Potentiometer
 * Farbsensor TCS3200
+* GPS-Empfänger
 
 Bestellen:
 https://www.reichelt.de/entwicklerboards-neopixel-ring-mit-12-ws2812rgb-leds-debo-led-np12-p235468.html?&trstct=pol_7&nbc=1 
-https://www.reichelt.de/infrarot-abstandssensor-gp2y0a21yk0f-rbt-sen-ir01-p258659.html
+https://www.reichelt.de/infrarot-abstandssensor-gp2y0a21yk0f-rbt-sen-ir01-p258659.html  - noch nicht bestellt
 
 https://www.conrad.de/de/p/iduino-1485324-linien-erkennungssensor-1485324.html?altOf=AN 
 https://www.reichelt.de/subminiatur-mikroschalter-1x-aus-flachhebel-lang-d2aw-a052d-r-p243152.html?&trstct=pos_1&nbc=1
@@ -63,3 +65,5 @@ https://www.thingiverse.com/thing:1851211 ebenso
 craftcloud
 
 freecad
+
+Schalter - Pullup - Pulldown -Widerstand

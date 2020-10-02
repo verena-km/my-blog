@@ -6,14 +6,7 @@ tags: Motor Motortreiber
 ---
 
 
-
-# Gleichstrommotoren
-
 Die Gleichstrommotoren benötigen viel mehr Strom als die Pins des Microcontrollers liefern können. Daher benötigt man einen Motortreiber um den von einer weiteren Spannungsquelle gelieferten Strom über die Pins zu schalten.
-
-
-
-
 
 ## Motormodul mit L298N-Chip
 
@@ -58,8 +51,10 @@ ENB | IN3 | IN4 | Beschreibung
 
 An ENA und ENB kann ein PWM-Signal angelegt und damit die Geschwindigkeit gesteuert werden
 
-
-
 ## Motorshields
 
 Es gibt für den Arduino und den Raspberry Pi auch Motor-Shields. Diese habe ich bislang noch nicht getestet.
+
+## Calliope-Mini-Motortreiber
+
+Beim Calliope-Mini ist bereits ein Motortreiber integriert. Näheres hierzu in [diesem Post]({% post_url 2020-09-16-calliope-hardware %})

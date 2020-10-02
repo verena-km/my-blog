@@ -1,0 +1,90 @@
+---
+layout: post
+title:  "NeoPixel am ESP32"
+date:   2020-09-18 07:08:49 +0200
+tags: ESP32 Neopixel
+---
+
+Neopixel sind kleine RGB-LEDs mit integrierten Chip. Sie werden über eine einzige Datenleitung angesteuert. Es gibt einzelne Neopixel, sowie mehrere in Ring- oder Streifenform. Wie die Neopixel funktinieren ist [hier](https://youtu.be/i2EgrplbYKA) sehr schön erklärt.
+
+Wir schließen einen NeoPixel-Ring mit 12 LED wie folgt an den ESP32 an:
+
+* NeoPixel-Ring-Power an ESP-3V3-Pin
+* NeoPixel-Ring-GND an ESP-GND
+* NeoPixel-Data-Input an ESP-GPIO-4
+
+Eigentlich braucht der NeoPixel 5V, aber es funktioniert (bei mir) auch mit 3,3 V.
+
+An folgendem MicroPython-Programm sieht man, wie man den NeoPixel-Ring programmieren kann:
+
+```
+import machine, neopixel
+import time
+
+# NeoPixel-Objekt erzeugen (Anschluss an Pin 4, Länge 12 LED)
+np = neopixel.NeoPixel(machine.Pin(4), 12)
+
+# Maximale Helligkeit
+max_brightness = 8
+
+# Ein paar Farbdefinitionen mit der maximale Helligkeit
+# Die Farben sind jeweils Tupel mit den Werten für R, G und B
+red = (max_brightness, 0, 0)
+yellow = (max_brightness, max_brightness, 0)
+green = (0, max_brightness, 0)
+cyan = (0, max_brightness, max_brightness)
+blue = (0, 0, max_brightness)
+purple = (max_brightness,0,max_brightness)
+white = (max_brightness,max_brightness,max_brightness)
+black = (0,0,0)
+
+# Einzelne LEDs nacheinander ansteuern
+np[0] = red
+np.write()
+time.sleep_ms(500)
+
+np[2] = yellow
+np.write()
+time.sleep_ms(500)
+
+np[4] = green
+np.write()
+time.sleep_ms(500)
+
+np[6] = cyan
+np.write()
+time.sleep_ms(500)
+
+np[8] = blue
+np.write()
+time.sleep_ms(500)
+
+np[10] = purple
+np.write()
+time.sleep_ms(500)
+
+### Farbwechsel
+
+# Liste mit Farben
+cycle = [red, yellow, green, cyan, blue, purple]
+# Anzahl der Pixel
+n = np.n
+for v in range(3):
+    for i in cycle:
+        for j in range(n):
+            np[j] = i
+            np.write()
+            time.sleep_ms(200)
+
+
+```
+
+Die verschachtelte Schleife geht dreimal die Liste der Farben durch und färbt alle 12 Pixel nacheinander in der Farbe ein.
+
+
+Linksammlung:
+https://randomnerdtutorials.com/micropython-ws2812b-addressable-rgb-leds-neopixel-esp32-esp8266/
+https://docs.micropython.org/en/latest/esp32/quickref.html#neopixel-driver 
+
+
+https://www.instructables.com/id/13-Ideas-for-Diffusing-LEDs/
