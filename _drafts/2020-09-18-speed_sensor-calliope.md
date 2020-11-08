@@ -27,7 +27,7 @@ Für den ersten minimalen Testaufbau ohne Geschwindigkeitsveränderung der Motor
 * einen Lego-Motor
 * den Speedsensor LM393
 * ein Lego-Technic-Riemenscheibe als Lochscheibe
-* den Callipe mit den herausgeführten Pin-Leisten
+* den Calliope mit den herausgeführten Pin-Leisten
 
 ![Minimaler Testaufbau Speedsensor](/images/foto_testaufbau_speedsensor_1.jpg) 
 
@@ -117,7 +117,6 @@ Wir verwenden:
 * zwei modifizierte Lego-Verbindungskabel
 
 
-
-
+TODO
 
 
