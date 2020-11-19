@@ -54,7 +54,7 @@ verwendet.
 
 ### Powerbank
 
-Eine weitere Möglichkeit zur Stromversorgung ist eine Powerbank (5 Volt).
+Eine weitere Möglichkeit zur Stromversorgung ist eine Powerbank (5 Volt). Die hat aber (zumeist) den Nachteil, dass sie bei zu kleinen Strömen automatisch nach ein paar Sekunden abschaltet.
 
 ## Eine Stromversorgung für alles
 

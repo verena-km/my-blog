@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Der Raspberry Pi"
-date:   2020-10-02
+date:   2020-11-08
 tags: Raspberry Microcontroller Pinout
 ---
 
@@ -166,7 +166,7 @@ Bei der Nummerierung der Pins muss man aufpassen, denn es gibt mehrere:
 
 * die pyhsikalische Pinnummer
 * die BCM-Nummer
-* die von der WiringPi-Bibliothek verwendete nummer
+* die von der WiringPi-Bibliothek verwendete Nummer
 
 
 ## Programmierung der GPIO-Pins mit Python
@@ -180,18 +180,13 @@ Python und viele der benötigten Bibliotheken sind auf dem Raspi vorinstalliert.
 * WiringPi
 
 
-Wir zeigen die Umsetzung von folgenden Beispielen mit Hilfe der Bibliotheken:
-* das Auslesen eines Tasters
-* das Schalten einer LED
-
-
 ### RPi.GPIO
 
-Die Bibliothek RPI.GPIO wird in vielen Beispielen genutzt, um  die GPIO-Pins anzusteuern. Hier kann man gut die einzelnen Schritte der Beschaltung der Pins nachvollziehen. 
+Die Bibliothek [RPI.GPIO](https://pypi.org/project/RPi.GPIO/) wird in vielen Beispielen genutzt, um  die GPIO-Pins anzusteuern. Hier kann man gut die einzelnen Schritte der Beschaltung der Pins nachvollziehen. 
 
-Welches man verwenden will, kann man bei RPI.GPIO angeben (GPIO.BCM oder GPIO.BOARD)
+Man kann angeben, welches Nummerierungsschema man verwenden will: GPIO.BCM oder GPIO.BOARD
 
-An- und Ausschalten einer LED:
+Hier das An- und Ausschalten einer LED an GPIO 23 als Beispiel in RPi.GPIO
 ```python
 import RPi.GPIO as GPIO
 import time
@@ -201,6 +196,10 @@ GPIO.output(23, GPIO.HIGH)
 time.sleep(0.5)
 GPIO.output(23, GPIO.LOW)
 ```
+
+### RPIO
+
+Neben RPi.GPIO gibt es noch [RPIO](https://pypi.org/project/RPIO/), damit habe ich mich allerdings bislang noch nicht beschäftigt.
 
 ### pigpio
 
@@ -214,9 +213,9 @@ Um den pigpiod-Daemen dauerhaft zu starten
 ```
 sudo systemctl enable pigpiod
 ```
-Durch die systemd-Konfiguration unter /lib/systemd/system/pigpiod.service wird pigpiod mit der Option -l gestartet, was bedeutet, dass das Remote-Socket-Interface deaktiviert ist.
+Durch die systemd-Konfiguration unter /lib/systemd/system/pigpiod.service wird pigpiod mit der Option -l gestartet, was bedeutet, dass das Remote-Socket-Interface deaktiviert ist. Man kann damit nur vom lokalen Rechner auf den pigpiod zugreifen.
 
-Pigpio kann auch dazu verwendet werden, die GPIO-Pins des Raspi von einem anderen Computer aus über Netzwerk anzusteuern. Um dies zu aktivieren ruft man "sudo raspi-config" auf und geht auf "5 Interfacing Options" - "P8 Remote GPIO aktivieren".
+Pigpio kann nämlich auch dazu verwendet werden, die GPIO-Pins des Raspi von einem anderen Computer aus über Netzwerk anzusteuern. Um dies zu aktivieren ruft man "sudo raspi-config" auf und geht auf "5 Interfacing Options" - "P8 Remote GPIO aktivieren".
 
 Verwendet weren bei pigpio die BCM-Nummern der Pins.
 
@@ -225,15 +224,17 @@ An- und Ausschalten einer LED:
 import pigpio
 import time
 pi = pigio.pi()
-pi.set_mode( 23, pigpio.OUTPUT)
+pi.set_mode(17, pigpio.OUTPUT)
 pi.write(17,1)
 time.sleep(0.5)
-pi.write(17,1)
+pi.write(17,0)
 ```
+
+Ein weiterer Vorteil von pigpio ist das über die Bibliothek bereitgestellte PWM-Signal, das beispielsweise eine Jitter-freie Ansteuerung eines Servos ermöglicht.
 
 ### gpiozero
 
-Die Bibliothek [gpiozero](https://gpiozero.readthedocs.io) baut auf RPI.GPIO und pigpio auf. Sie stellt für viele Kompontenten wie LED, Schalter, Motor etc. eigene Klassen zur Verfügung. Man arbeitet damit auf einem höheren Abstraktionslevel.
+Die Bibliothek [gpiozero](https://gpiozero.readthedocs.io) baut auf den anderen Biblotheken auf. Sie stellt für viele Kompontenten wie LED, Schalter, Motor etc. eigene Klassen zur Verfügung. Man arbeitet damit auf einem höheren Abstraktionslevel. Welcher "Unterbau" verwendet wird kann man über die sog. "Pin-Factory" bestimmen. Hier stehen rpigpio, rpio, pigpio und native zur Verfügung
 
 An- und Ausschalten einer LED:
 ```python
