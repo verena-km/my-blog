@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansteuerung von Gleichstrommotoren"
-date:   2021-01-11
+date:   2020-09-30
 tags: Motor Motortreiber
 ---
 
@@ -12,7 +12,7 @@ Die Gleichstrommotoren benötigen viel mehr Strom als die Pins des Microcontroll
 
 Mit dem Motormodul mit L298N-Chip kann man ein oder zwei Gleichstrommotoren vorwärts und rückwärts betreiben. 
 
-Man kann ihn sowohl für den Raspberry Pi als auch für den Arduino verwenden. Er funktioniert auch am Calliope mini - so können auch dort zwei Motoren vorwärts und rückwärts betrieben werden.
+Man kann ihn für den Raspberry Pi, den ESP32 und den Arduino. Er funktioniert auch am Calliope mini - so können auch dort zwei Motoren vorwärts und rückwärts betrieben werden.
 
 Folgendes Bild zeigt das Motormodul: 
 
@@ -55,7 +55,7 @@ ENB | IN3 | IN4 | Beschreibung
 1 | 1 | 0 | Motor B rückwärts
 1 | 1 | 1 | Motor B bremsen
 
-An ENA und ENB kann ein PWM-Signal angelegt und damit die Geschwindigkeit gesteuert werden
+An ENA und ENB kann ein PWM-Signal angelegt und damit die Geschwindigkeit gesteuert werden.
 
 ## Motorshields
 
@@ -63,4 +63,4 @@ Es gibt für den Arduino und den Raspberry Pi auch Motor-Shields. Diese habe ich
 
 ## Calliope-Mini-Motortreiber
 
-Beim Calliope-Mini ist bereits ein Motortreiber integriert. Näheres hierzu in [diesem Post]({% post_url 2020-09-16-calliope-hardware %})
+Beim Calliope-Mini ist bereits ein Motortreiber integriert. Näheres hierzu in [diesem Post]({% post_url 2020-09-16-calliope-hardware %}.)
