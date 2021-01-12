@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Servomotor"
-date:   2020-10-31
+date:   2020-11-19
 tags: Servomotor RasperryPi ESP32 Calliope
 ---
 
-Die Achse eines Servomotors kann man auf bestimmte Positionen meist in einem Bereich von 0 bis 90° oder 0 bis 180° drehen. Ein Servomotor ist daher für Drehbewegungen auf genau bestimmte Zielpositionen innerhalb des erlaubten Bereichs geeignet. Das ist beispielsweise bei einer Lenkung der Fall.  Falls nötig, kann man auch mit einer Übersetzung (größeres Zahnrad am Servo treibt kleineres Zahnrad an) den Bereich vergrößern.
+Die Achse eines Servomotors kann man auf bestimmte Positionen in einem vorgegebenen Bereich (z.B. von 0 bis 90° oder von 0 bis 180°) drehen. Ein Servomotor ist daher für Drehbewegungen auf bestimmte Zielpositionen innerhalb des erlaubten Bereichs geeignet. Das ist beispielsweise bei einer Lenkung der Fall. Falls nötig, kann man auch mit einer Übersetzung (größeres Zahnrad am Servo treibt kleineres Zahnrad an) den Bereich vergrößern.
 
 Einfache Servomotoren haben meist drei Anschlüsse:
 * Rot für die Versorgungsspannung von 5 V
@@ -14,7 +14,7 @@ Einfache Servomotoren haben meist drei Anschlüsse:
 
 ![Foto Servo-Motor](/images/foto_servo.jpg) 
 
-Für die Ansteuerung der jeweiligen Winkelposition wird [Puls-Weiten-Modulation (PWM)]({% post_url 2020-07-21-pwm%}) genutzt und zwar meist ein Signal von 50 Hz, also ein Signal mit einer Periodenlänge von 20 ms. Die Position des Servos ist abhängig von der Dauer des High-Pegels im PWM-Signal (= Pulsweite / Duty Cycle). Dabei gilt in der Regel:
+Für die Ansteuerung der jeweiligen Winkelposition wird [Puls-Weiten-Modulation (PWM)]({% post_url 2020-11-16-pwm%}) genutzt und zwar meist ein Signal von 50 Hz, also ein Signal mit einer Periodenlänge von 20 ms. Die Position des Servos ist abhängig von der Dauer des High-Pegels im PWM-Signal (= Pulsweite / Duty Cycle). Dabei gilt in der Regel:
 
 * 1,5 ms von 20 ms = 7,5 % entspricht 0° (Mittelposition)
 * Pulsweite zwischen 0,5 und 2,5 ms, zum Teil auch weniger
@@ -109,7 +109,7 @@ sleep(2)
 mc1811.angle=-20
 ```
 
-Man kann auch für die Servotypen, die man häufig nutzt eigene, von AngularServo abgeleitete Klassen erstellen:
+Man kann auch für die Servotypen, die man häufig nutzt, eigene, von AngularServo abgeleitete Klassen erstellen:
 
 ```python
 from gpiozero import AngularServo
@@ -120,12 +120,22 @@ factory = PiGPIOFactory()
 
 class MC1811(AngularServo):
     def __init__(self, pin):
-         super().__init__(pin, min_angle=-45, max_angle=45, min_pulse_width=1.1/1000, max_pulse_width=1.9/1000, pin_factory = factory )
+         super().__init__(pin,
+                     min_angle=-45,
+                     max_angle=45,
+                     min_pulse_width=1.1/1000, 
+                     max_pulse_width=1.9/1000,
+                     pin_factory = factory)
 
 
 class Y3009(AngularServo):
     def __init__(self, pin):
-         super().__init__(pin, min_angle=-90, max_angle=90, min_pulse_width=0.56/1000, max_pulse_width=2.33/1000, pin_factory = factory )
+         super().__init__(pin,
+                     min_angle=-90, 
+                     max_angle=90, 
+                     min_pulse_width=0.56/1000, 
+                     max_pulse_width=2.33/1000, 
+                     pin_factory = factory)
 ```
 
 Diese kann man dann wie folgt nutzen:

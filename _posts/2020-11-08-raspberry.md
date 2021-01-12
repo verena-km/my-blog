@@ -13,7 +13,7 @@ Der Raspberry Pi ist ein Einplatinencomputer, bei dem meist ein angepasstes Linu
 
 ![Raspberry Pi 3 Model B Plus und Raspberry Pi Zero W](/images/foto_raspberry_3_und_zero.jpg) 
 
-Diese Raspis verfügen über 40 GPIO-Pins, WLAN und Bluetooth und einen Kameraanschluss.
+Diese Raspis verfügen über 40 GPIO-Pins, WLAN und Bluetooth und einen Kameraanschluss. Eine analoge Soundausgabe ist mit dem Raspberry Pi Zero W nicht möglich.
 
 Programmiert wird der Raspi oft in Python. Es sind aber auch andere Programmiersprachen möglich. Dabei kann man das Programm direkt auf dem Rapi erstellen.
 
@@ -234,7 +234,7 @@ Ein weiterer Vorteil von pigpio ist das über die Bibliothek bereitgestellte PWM
 
 ### gpiozero
 
-Die Bibliothek [gpiozero](https://gpiozero.readthedocs.io) baut auf den anderen Biblotheken auf. Sie stellt für viele Kompontenten wie LED, Schalter, Motor etc. eigene Klassen zur Verfügung. Man arbeitet damit auf einem höheren Abstraktionslevel. Welcher "Unterbau" verwendet wird kann man über die sog. "Pin-Factory" bestimmen. Hier stehen rpigpio, rpio, pigpio und native zur Verfügung
+Die Bibliothek [gpiozero](https://gpiozero.readthedocs.io) baut auf den anderen Biblotheken auf. Sie stellt für viele Kompontenten wie LED, Schalter, Motor etc. eigene Klassen zur Verfügung. Man arbeitet damit auf einem höheren Abstraktionslevel. Welcher "Unterbau" verwendet wird kann man über die sog. "Pin-Factory" bestimmen. Hier stehen rpigpio, rpio, pigpio und native zur Verfügung.
 
 An- und Ausschalten einer LED:
 ```python

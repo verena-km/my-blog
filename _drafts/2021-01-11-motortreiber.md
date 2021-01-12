@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "Ansteuerung von Gleichstrommotoren"
-date:   2020-07-20 21:08:49 +0200
+date:   2021-01-11
 tags: Motor Motortreiber
 ---
 
 
-Die Gleichstrommotoren benötigen viel mehr Strom als die Pins des Microcontrollers liefern können. Daher benötigt man einen Motortreiber um den von einer weiteren Spannungsquelle gelieferten Strom über die Pins zu schalten.
+Die Gleichstrommotoren benötigen viel mehr Strom als die Pins des Microcontrollers liefern können. Daher benötigt man einen Motortreiber um den von einer weiteren Spannungsquelle gelieferten Strom über die Pins zu schalten. 
 
 ## Motormodul mit L298N-Chip
 
@@ -14,19 +14,25 @@ Mit dem Motormodul mit L298N-Chip kann man ein oder zwei Gleichstrommotoren vorw
 
 Man kann ihn sowohl für den Raspberry Pi als auch für den Arduino verwenden. Er funktioniert auch am Calliope mini - so können auch dort zwei Motoren vorwärts und rückwärts betrieben werden.
 
-((Bild / Schaltung einfügen))
+Folgendes Bild zeigt das Motormodul: 
 
-Der Motortreiber L298 hat folgende Eingänge
+![Schaltplan L298](/images/fritzing_l298.png)
+
+An die Ausgänge an beiden Seiten werden die Gleichstrommotoren angeschlossen. 
+
+Links unten wird der Motortreiber mit Spannung versorgt:
 
 * Versorgungsspannung
 * Ground
 
-und für Motor A:
+Rechts unten befinden sich die Steuereingänge für die beiden Motoren. Diese können mit digitalen Ausgängen von Calliope, Raspi oder Arduino verbunden werden. Der Ground des Microcontrollers muss dann noch mit dem Ground des Motortreibers verbunden werden.
+
+Die Steuereingänge für Motor A sind:
 * ENA
 * IN1
 * IN2
 
-und für Motor B:
+und  die für Motor B:
 * ENB
 * IN3
 * IN4

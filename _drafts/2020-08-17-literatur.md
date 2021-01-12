@@ -17,6 +17,35 @@ Das Buch enthält alles was man über Lego-Technic wissen muss.
 
 ## LEGO® und Elektronik: Raspberry Pi, Arduino, Sensoren, Motoren und vieles mehr einsetzen und programmieren (mitp Professional) von Thomas Kaffka
 
+Im Buch werden vor allem Fahrzeuge gebaut.
+
+Für die Steuerung werden Arduino und Raspi verwendet. Als Sensoren und Aktoren werden einerseits Lego-EV3-Komponenten verwendet, die über den BrickPi an den Raspi angebunden werden. Als kostengünstige Alternative zeigt der Autor den Einsatz folgender Sensoren und Aktoren:
+* kleine Getriebemotoren
+* Motortreiber TB6612FNG
+* Encoder zum Radumdrehungen zählen
+* Mikroschalter als Touch-Sensor 
+* Fototransistor SFH300 (am Raspi über MCP3008)
+* Ultraschallsensor HC-SR04
+* Infrarotsensor GP2YA41SKOF
+* CMPS03 Kompass
+* Piezo-Schallgeber
+* Raspi-Kamera
+* Lautsprecher
+* LCD-Display 
+* Line-Sensor
+
+Fernsteuerung mit
+* App "Raspberry SSH Light"
+* Apache + PHP5
+
+Die meisten Projekte wurden sowohl für den Arduino, als auch für den Raspberry Pi umgesetzt.
+
+Download von Bauanleitungen und Code:
+https://www.mitp.de/IT-WEB/LEGO-und-Elektronik.html
+
+
++ Schöner Python-Code
+- Motor nicht an Lego-Achse
 
 ## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren. Programmierung und Elektronik spielerisch entdecken von Ingmar Stapel
 
