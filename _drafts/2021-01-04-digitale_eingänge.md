@@ -60,13 +60,21 @@ Beim Raspi kommt es wieder darauf an, welche Bibliothek man verwendet.
 
 RPi.GPIO:
 ```python
-GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+pin = 4
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+while True:
+    print(GPIO.input(pin))
 ```
 
 gpiozero:
 ```python
+from gpiozero import Button
 button = Button(4,pull_up=False)
+while True:
+    print(button.value)
 ```
 (True ist default)
 
@@ -82,33 +90,49 @@ Ein Problem bei Tastern ist möglicherweise das [Prellen (Bouncing)](https://www
 Mit RPI.GPIO geht das wie folgt:
 
 ```python
-def my_callback(channel):
-    print('This is a edge event callback function!')
-    print('Edge detected on channel %s'%channel)
-    print('This is run in a different thread to your main program')
-GPIO.add_event_detect(channel, GPIO.RISING, callback=my_callback)  # add rising edge detection on a channel
+import RPi.GPIO as GPIO
+import time
+from signal import pause
+
+GPIO.setmode(GPIO.BCM)
+pin = 4
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+def say_hello(pin):
+    print("Hello!")
+   
+GPIO.add_event_detect(pin, GPIO.RISING, callback=say_hello)
+pause()
 ```
+Bei RPi.GPIO gibt es die folgenden Events:
+* GPIO.RISING
+* GPIO.FALLING
+* GPIO.BOTH
+Auf jedem Pin kann nur auf eines dieser Events ein Interrupt registriert werden
 
 Gegen das Prellen kann man einen Bouncetime-Wert angeben:
-
-GPIO.add_event_detect(channel, GPIO.RISING, callback=my_callback, bouncetime=200)
-
+```python
+GPIO.add_event_detect(pin, GPIO.RISING, callback=say_hello)
+```
 
 Bei gpiozero sieht man die Nutzung an folgendem Beispiel:
 
+```python
 from gpiozero import Button
 from signal import pause
 
-```python
 def say_hello():
     print("Hello!")
 
-button = Button(2)
+def say_bye():
+    print("ByeBye!")    
 
+button = Button(4,pull_up=False)
 button.when_pressed = say_hello
-
+button.when_released = say_bye
 pause()
 ```
+Die Funktion say_hello wird bei jedem Wechsel von 0 auf 1 ausgeführt, die Funktion say_bye bei jedem Wechsel von 1 auf 0.
 
 ### MicroPython / ESP 32
 
