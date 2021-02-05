@@ -115,6 +115,53 @@ pause()
 ```
 
 
+from cars import ServoCar
+from motors import GeekServoGray
+from gpiozero import Motor
+from bluedot import BlueDot
+from signal import pause
+
+def move(pos):
+    # if pos.y > 0:
+    #     speed = pos.distance
+    # else:
+    #     speed = -pos.distance
+
+    my_car.drive(speed=pos.y, direction=pos.x)
+
+def stop():
+    my_car.stop()
+
+def shutdown():
+    command = "/usr/bin/sudo /sbin/shutdown -r now"
+    import subprocess
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+
+# Erzeugen des Motorobjekts unter Angabe der genutzten Pins
+my_motor = Motor(forward=17,backward=27,enable=22)
+# Erzeugen des Servoobjekts unter Angabe des genutzten Pins
+my_servo = GeekServoGray(pin=18)
+# Erzeugen des Fahrzeugobjekts unter Angabe der beiden Motoren
+my_car = ServoCar(my_servo, my_motor)
+
+# BlueDot-Objekt erzeugen
+bd = BlueDot(cols=1,rows=2)
+bd[0,0].color = "blue"
+bd[0,0].square = True
+bd[0,1].color = "red"
+# Auszuführende Methoden festlegen
+# beim Drücken
+bd[0,0].when_pressed = move
+# beim Bewegen
+bd[0,0].when_moved = move
+# beim Loslassen
+bd[0,0].when_released = stop
+
+bd[0,1].when_pressed = shutdown
+
+pause()
+
 ## Python-Programm beim Systemstart starten
 
 Damit die Fernsteuerung nach dem Hochfahren des Raspis direkt verfügbar ist, muss das Python-Programm beim Systemstart automatisch gestartet werden. Wie man hier gut nachlesen kann, gibt es mehrere Möglichkeiten zum automatischen Starten:
