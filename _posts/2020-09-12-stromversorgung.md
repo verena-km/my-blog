@@ -24,7 +24,7 @@ Zu den Lego-Power-Functions gehört die Batteriebox #8881, für 6-AA-Batterien (
 
 ![Lego Power-Functions-Batteriebox](/images/foto_lego_batteriebox1.jpg) 
 
-Die Lego-Batteriebox läßt sich gut mit Lego-Technic-Bausteinen verbinden und somit auch gut in ein Lego-basierendes Robotermodell einbauen. Man sollte aber bei der Konzeption auch an den Batteriewechsel denken. 
+Die Lego-Batteriebox lässt sich gut mit Lego-Technic-Bausteinen verbinden und somit auch gut in ein Lego-basierendes Robotermodell einbauen. Man sollte aber bei der Konzeption auch an den Batteriewechsel denken. 
 Also:
 * entweder so einbauen, dass man sie zum Wechsel der Batterien gut ausbauen kann
 * oder so einbauen, dass  man an beide Seiten dran kommt, denn es sind jeweils drei Batterien pro Seite

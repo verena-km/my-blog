@@ -11,7 +11,7 @@ Folgende Editoren stehen für die Programmierung des Calliope mini zur Verfügun
 
 Webbasiert:
 * [Makecode](https://makecode.calliope.cc/)
-* [Makecode alktuelle Betaversion](https://makecode.calliope.cc/beta#editor)
+* [Makecode aktuelle Betaversion](https://makecode.calliope.cc/beta#editor)
 * [Open Roberta Lab](https://lab.open-roberta.org/)
 
 Android / iOS:
