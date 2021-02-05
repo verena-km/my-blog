@@ -5,7 +5,7 @@ date:   2021-02-01
 tags: Servomotor Motor Lego
 ---
 
-Zufällig bin ich auf die folgenden "Geekservo"-Motoren gestossen, die man prima für Lego-Robotik-Projekte verwenden kann, denn die Motor-Achsen sind Lego-Technic-Achsen und die Motoren können über Noppen bzw. Verbinder mit Lego bzw. Lego-Technic verbunden werden.
+Zufällig bin ich auf die folgenden "Geekservo"-Motoren gestoßen, die man prima für Lego-Robotik-Projekte verwenden kann, denn die Motor-Achsen sind Lego-Technic-Achsen und die Motoren können über Noppen bzw. Verbinder mit Lego bzw. Lego-Technic verbunden werden.
 
 ![Geekservos](/images/foto_geekservo.jpg)
 
