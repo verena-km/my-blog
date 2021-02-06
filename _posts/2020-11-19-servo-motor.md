@@ -2,7 +2,7 @@
 layout: post
 title:  "Servomotor"
 date:   2020-11-19
-tags: Servomotor RasperryPi ESP32 Calliope
+tags: Servomotor Rasperry ESP32 Calliope
 ---
 
 Die Achse eines Servomotors kann man auf bestimmte Positionen in einem vorgegebenen Bereich (z.B. von 0 bis 90° oder von 0 bis 180°) drehen. Ein Servomotor ist daher für Drehbewegungen auf bestimmte Zielpositionen innerhalb des erlaubten Bereichs geeignet. Das ist beispielsweise bei einer Lenkung der Fall. Falls nötig, kann man auch mit einer Übersetzung (größeres Zahnrad am Servo treibt kleineres Zahnrad an) den Bereich vergrößern.
