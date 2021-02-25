@@ -7,7 +7,7 @@ tags: GPIO Pullup Pulldown Callback
 
 Verwendet man einen GPIO-Pin als Eingang, kann man z.B. Schalter anschließen. Um für einen definierten Grundzustand zu sorgen, nutzt man einen Pullup- bzw einen Pulldown-Widerstand.
 
-Wenn man den GPIO-Pin mit dem Pluspol verbindet, braucht man einen Pulldown-Widerstand, wenn man ihn mit dem Minuspol verbindet braucht man einen Pullup-Widerstand.
+Wenn man den GPIO-Pin mit dem Pluspol verbindet, braucht man einen Pulldown-Widerstand, wenn man ihn mit dem Ground verbindet braucht man einen Pullup-Widerstand.
 
 ## Widerstände in die Schaltung einbauen
 
@@ -21,7 +21,7 @@ Pulldown:
 
 Empfohlen ist ein Widerstand mit 10 kOhm.
 
-Detailliertere Erläuterungen zum Thema Pullup- und Pulldown-Widerstände findet man im [Elektronik-Kompendium](https://www.elektronik-kompendium.de/sites/raspberry-pi/2006051.htm)
+Detailliertere Erläuterungen zum Thema Pullup- und Pulldown-Widerstände findet man im [Elektronik-Kompendium](https://www.elektronik-kompendium.de/sites/raspberry-pi/2006051.htm).
 
 ## Widerstände softwareseitig aktivieren:
 
@@ -30,7 +30,7 @@ Auf der sicheren Seite ist man aber bei der Verwendung eines "echten Widerstande
 
 ### MicroPython / ESP32
 
-In folgendem Beispiel für den ESP32 mit MicroPython wird Pin 23 mit einem PULL_UP-Widerstand konfiguriert.
+In folgendem Beispiel für den ESP32 mit MicroPython wird Pin 23 mit einem Pullup-Widerstand konfiguriert.
 
 ```python
 from machine import Pin
@@ -108,11 +108,12 @@ Bei RPi.GPIO gibt es die folgenden Events:
 * GPIO.RISING
 * GPIO.FALLING
 * GPIO.BOTH
-Auf jedem Pin kann nur auf eines dieser Events ein Interrupt registriert werden
 
-Gegen das Prellen kann man einen Bouncetime-Wert angeben:
+Auf jedem Pin kann nur auf eines dieser Events ein Interrupt registriert werden.
+
+Gegen das Prellen kann man einen Bouncetime-Wert in Millisekunden angeben:
 ```python
-GPIO.add_event_detect(pin, GPIO.RISING, callback=say_hello)
+GPIO.add_event_detect(pin, GPIO.RISING, callback=say_hello, bouncetime=500)
 ```
 
 Bei gpiozero sieht man die Nutzung an folgendem Beispiel:
@@ -134,6 +135,11 @@ pause()
 ```
 Die Funktion say_hello wird bei jedem Wechsel von 0 auf 1 ausgeführt, die Funktion say_bye bei jedem Wechsel von 1 auf 0.
 
+Auch hier kann man gegen das Prellen einen Wert (in Sekuncen) für die Bouncetime angeben:
+```python
+button = Button(4,pull_up=False, bounce_time=0.5)
+```
+
 ### MicroPython / ESP 32
 
 In MicroPython kann man einen solchen Interrupt wie folgt umsetzen:
@@ -148,7 +154,7 @@ p0 = Pin(0, Pin.IN)
 p0.irq(trigger=Pin.IRQ_FALLING, handler=callback)
 ```
 
-Mit der Methode `irq()` der Klasse Pin legt man einen solchen Interrupt fest und definiert mit `trigger`, ob er bei beim Wechsel von 0 nach 1 (Pin.IRQ_RISING) beim Wechsel von 1 nach 0 (Pin.IRQ_FALLING) oder bei beidem (Pin.IRQ_FALLING|Pin.IRQ_RISING) ausgeführt werden soll.
+Mit der Methode `irq()` der Klasse Pin legt man einen solchen Interrupt fest und definiert mit `trigger`, ob er bei beim Wechsel von 0 nach 1 (Pin.IRQ_RISING) beim Wechsel von 1 nach 0 (Pin.IRQ_FALLING) oder bei beidem (Pin.IRQ_FALLING\|Pin.IRQ_RISING) ausgeführt werden soll.
 
 Was nicht geht, ist für RISING und FALLING getrennte IRQs zu definiert. Es wird nur einer ausgeführt.
 

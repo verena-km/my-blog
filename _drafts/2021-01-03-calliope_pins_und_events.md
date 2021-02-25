@@ -43,7 +43,7 @@ basic.forever(function () {
 ```
 Die Funktion liefert 1, wenn zwischen dem Pin und dem Pluspol eine Verbindung besteht und 0, wenn nicht.
 
-Will man feststellen, ob zwischen dem Pin und dem Minuspol eine Verbindung besteht, muss man den 'PinPullMode' auf 'PinPullMode.PullUp' setzen.
+Will man feststellen, ob zwischen dem Pin und dem Minuspol eine Verbindung besteht, muss man den 'PinPullMode' auf 'PinPullMode.PullUp' setzen:
 
 ```javascript
 pins.setPull(DigitalPin.P0, PinPullMode.PullUp)

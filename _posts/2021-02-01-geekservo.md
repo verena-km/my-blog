@@ -30,7 +30,7 @@ Er kann wie übliche Servomotoren genutzt werden, wie in meinem [Post zu Servomo
 
 ## Grüner Geekservo
 
-Der grüne GeekServo (Geekservo 9g 360° Servo) ist ein dauerhaft drehender Servomotor und benötigt ebenfalls eine Spannung zwischen 3,3 und 6 Volt. Er wird ebenfalls mit drei Kabeln angeschlossen:
+Der grüne Geekservo (Geekservo 9g 360° Servo) ist ein dauerhaft drehender Servomotor und benötigt ebenfalls eine Spannung zwischen 3,3 und 6 Volt. Er wird ebenfalls mit drei Kabeln angeschlossen:
 * Rot für die Versorgungsspannung 
 * Braun für Ground
 * Orange für das Steuersignal
