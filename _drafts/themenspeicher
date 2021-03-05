@@ -83,3 +83,29 @@ https://www.hackster.io/philipp-henkel/lego-power-functions-ir-sender-for-micro-
 https://github.com/philipphenkel/pxt-powerfunctions 
 
 https://www.heise.de/tipps-tricks/SSH-Key-fuer-GitHub-Repositories-einrichten-4627459.html
+
+
+## Alternative: Tastatursteuerung
+https://www.instructables.com/Controlling-a-Raspberry-Pi-RC-Car-With-a-Keyboard/
+
+
+
+TODO:
+
+- Kamera am Raspi, Raspi Zero
+- OpenCV
+
+- Microschalter
+
+- Sensoren
+    - Ultraschall
+    - IR-Sensor
+
+- Linienfolger
+- Speedsensor / Encoder
+
+- Schrittmotor am ESP, Raspi, Calliope
+
+- Infrarot-Empfänger
+
+- Bluetooth 
