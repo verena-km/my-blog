@@ -143,7 +143,8 @@ https://raspberrypi.stackexchange.com/questions/22288/how-can-i-get-raspivid-to-
 ### UV4L
 
 ### mjpg_streamer
-
+https://raubal-it.com/index.php/2020/11/27/raspberry-pi-raspi-als-webcam-nutzen/
+Stapel-Buch
 
 ## Nutzung in Kivy
 https://www.youtube.com/watch?v=1XcKfstKMFQ

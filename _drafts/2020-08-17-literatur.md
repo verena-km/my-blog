@@ -47,7 +47,35 @@ https://www.mitp.de/IT-WEB/LEGO-und-Elektronik.html
 + Schöner Python-Code
 - Motor nicht an Lego-Achse
 
-## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren. Programmierung und Elektronik spielerisch entdecken von Ingmar Stapel
+## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren.  von Ingmar Stapel
+
+Im Buch werden Fahrzeuge mit dem Raspi gebaut, verwendet werden u.a.:
+- Stromversorgung über Akku / Batterien mit Step-down-converter
+- Kameramodul
+- einfache Getriebemotoren mit Motortreiber L298N
+- Stepdown-Konverter
+- verschiedene Chassis Pappe / Lego / Acrylglas
+- Raspi Sense Hat (Gyroskop, Kompass, Beschleunigung, Temperatur, Luftdruck, Luftfeuchtigkeit, LED-Matrix, Joystick)
+- Time of Flight-Sensor VL53L1X
+- GPS-Empfänger
+- Servocontroller PCA9685
+- Grove I2C-Hub
+- Adafruit-Mini-Pan-Tilt-Kit
+
+Nach einem kurzen Abstecher über die Programmierung mit Scratch folgen Programmierbeispiele mit Python unter Verwendung von RPi.GPIO.
+
+Das Live-Videostreaming wird mit mjpg-streamer realisiert, eine Web-Fernsteuerung über Flask.
+
+Desweiteren gibt es eine Einführung in Threads und Programme die Threads bei der Steuerung über Gyroskop und Kompass sowie bei der Nutzung des Abstandssensors verwenden.
+
+
+Download von Bauanleitungen und Code
+www.rheinwerk-verlag.de/4812 - Toy Story
+
++ Nutzung von verschiedener Hardwarekomponenten
+- Code nicht objektorientiert
+- nicht speziell Lego
+
 
 
 ##  FRANZIS LEGO® für echte Kerle: LEGO®-Steine mit Elektronik zum Leben erwecken. von E.F. Engelhardt

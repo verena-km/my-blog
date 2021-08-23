@@ -50,7 +50,7 @@ Danach erscheinen die Bluetooth-Adressen:
 ```
 Hier wird beispielsweise die Bluetooth-Schnittstelle eines anderen Raspis angezeigt. Um diesen zu pairen wird folgender Befehl eingegeben. Mit dem Pairen erteilt man den Geräten die Berechtigung miteinander zu kommunizieren:
 
-
+```
 [bluetooth]# pair B8:27:EB:A6:96:88
 Attempting to pair with B8:27:EB:A6:96:88
 
@@ -310,7 +310,7 @@ https://lancaster-university.github.io/microbit-docs/ubit/radio/
 
 
 
-https://scribles.net/setting-up-bluetooth-serial-port-profile-on-raspberry-pi-using-d-bus-api/
+WICHTIG  https://scribles.net/setting-up-bluetooth-serial-port-profile-on-raspberry-pi-using-d-bus-api/
 
 https://stackoverflow.com/questions/41804222/cant-redirect-rfcomm-output-to-a-file
 
@@ -322,3 +322,68 @@ http://people.csail.mit.edu/rudolph/Teaching/Articles/PartOfBTBook.pdf
 
 
 Callipe Radio vs. Bluetooth
+
+
+
+zu /dev/rfcomm
+https://newbedev.com/how-to-i-connect-a-raw-serial-terminal-to-a-bluetooth-connection
+http://www.koehlers.de/wiki/doku.php?id=pc:bluetooth
+
+
+https://play.google.com/store/apps/details?id=com.crhostservices.com.crhostservices.androidbtcontrol&hl=gsw&gl=US 
+
+https://hicraigchen.medium.com/access-raspberry-pi-terminal-via-bluetooth-on-android-device-9e51cc83221f
+
+
+https://www.raspberry-pi-geek.com/Archive/2014/08/Getting-BLE-to-behave-on-the-Pi/(offset)/4
+
+
+Hier ist eine gute Anleitung mit /dev/rfcomm
+https://raspberrypi.stackexchange.com/questions/121216/how-to-best-handle-raspberry-pi-4-and-smartphone-connection-over-bluetooth-and-p
+
+
+Client für Android erstellen mit App Inventor
+https://www.youtube.com/watch?v=f4tnEBBlYAc
+
+Eigene Adresse rausfinden:
+
+$ hcitool dev
+
+Adressen:
+tuxli 68:54:5A:1A:AD:2D
+libelle E4:5F:01:09:2F:5A
+
+
+
+bluetooth]# info E4:5F:01:09:2F:5A
+Device E4:5F:01:09:2F:5A (public)
+	Name: libelle
+	Alias: libelle
+	Paired: yes
+	Trusted: no
+	Blocked: no
+	Connected: no
+	LegacyPairing: no
+	UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+	UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+	UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+	Modalias: usb:v1D6Bp0246d0532
+
+
+## Blueman
+
+
+Mehr möglichkeiten hat man mit dem Bluetooth-Manager Blueman hat. Man installiert ihn wie folgt:
+
+$ sudo apt-get install bluetooth  pi-bluetooth bluez blueman
+
+Bei mir waren pi-pluetooth und bluez schon installiert.
+
+Beim Start und Zugriff habe ich aber folgende Meldung erhalten:
+
+org.freedesktop.DBus.Python.dbus.exceptions.DBusException: Not authorized
+
+$ usermod -a pi -G netdev
+
+und Anpassung der Datei /etc/polkit-1/rules.d/blueman.rules brachten keinen Erfolg.
+
