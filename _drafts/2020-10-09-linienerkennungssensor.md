@@ -29,3 +29,6 @@ while True:
     print(linechecker.value())
     time.sleep_ms(50)
 ```
+
+
+https://projects.raspberrypi.org/en/projects/rpi-python-line-following/4
