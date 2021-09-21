@@ -5,7 +5,7 @@ date:   2021-08-16
 tags: Speedsensor Calliope Raspberry 
 ---
 
-Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, das genaue Fahren von Distanzen - z.B. "Fahre 50 cm geradeaus" zu programmieren. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
+Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, festgelegte Distanzen (z.B. 50 cm vorwärts) zu faharen. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
 
 Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln. Das können z.B. sein:
 * [Hall-Sensoren](https://de.wikipedia.org/wiki/Hall-Sensor)
@@ -179,4 +179,4 @@ Mit diesem Verfahren kann man die Drehzahl von Motoren ermitteln und mit anderen
 
 ## Messung zur Steuerung verwenden
 
-Man kann natürlich auch die gemessenen Werte verwenden, um den Motor zu steuern, also beispielsweise einen Motor nur eine zuvor festgelegte Anzahl von Umdrehungen durchführen lassen oder ein Fahrzeug damit eine bestimmte Strecke vorwärts fahren lassen. Hierzu mehr  in einem weiteren Post.
+Man kann natürlich auch die gemessenen Werte verwenden, um den Motor zu steuern, also beispielsweise einen Motor nur eine zuvor festgelegte Anzahl von Umdrehungen durchführen lassen oder ein Fahrzeug damit eine bestimmte Strecke vorwärts fahren lassen. Hierzu mehr in einem weiteren Post.

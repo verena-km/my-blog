@@ -2,7 +2,7 @@
 layout: post
 title:  "Calliope - Programmierung"
 date:   2020-09-17
-tags: Calliope Makecode Debugging
+tags: Calliope Makecode Serial
 ---
 
 ## Editoren

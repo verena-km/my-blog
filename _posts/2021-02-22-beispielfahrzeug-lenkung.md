@@ -2,7 +2,7 @@
 layout: post
 title:  "Ein Fahrzeug mit Lenkung und Raspberry Pi Zero - Fernsteuerung mit BlueDot"
 date:   2021-02-22 
-tags: RasberryPi Servomotor BlueDot Differenzial Systemstart Fernsteuerung
+tags: Raspberry Servomotor BlueDot Differenzial Systemstart Fernsteuerung gpiozero Motor L298
 ---
 
 Dieses von einem Raspi Zero gesteuerte Fahrzeug wird von einem Motor angetrieben und nutzt für die Lenkung einen Servomotor. Es kann von einem Android-Smartphone mit der App BlueDot über Bluetooth ferngesteuert werden.

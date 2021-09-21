@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Raspi-Fahrzeug mit zwei Antriebsmotoren"
-date:   2021-09-18
-tags: Raspberry Motor gpiozero Beispielfahrzeug
+date:   2021-09-21
+tags: Beispielfahrzeug Raspberry gpiozero L298 Motor
 ---
 
 Dieses Raspi-Fahrzeug mit zwei Antriebsmotoren soll als Grundlage für verschiedene Erweiterungen mit Sensoren verwendet werden.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Ansteuerung von Gleichstrommotoren"
 date:   2020-09-30
-tags: Motor Motortreiber
+tags: Motor L298
 ---
 
 
