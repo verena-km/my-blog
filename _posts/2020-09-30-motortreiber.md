@@ -63,4 +63,4 @@ Es gibt für den Arduino und den Raspberry Pi auch Motor-Shields. Diese habe ich
 
 ## Calliope-Mini-Motortreiber
 
-Beim Calliope-Mini ist bereits ein Motortreiber integriert. Näheres hierzu in [diesem Post]({% post_url 2020-09-16-calliope-hardware %}.)
+Beim Calliope-Mini ist bereits ein Motortreiber integriert. Näheres hierzu in [diesem Post]({ post_url 2020-09-16-calliope-hardware %}.)

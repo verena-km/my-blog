@@ -1,9 +1,4 @@
----
-layout: post
-title:  "Der Speedsensor am ESP32"
-date:   2020-09-18 07:08:49 +0200
-tags: Speedsensor LM393 Lochscheibe Encoder ESP32
----
+## Funktionstest am ESP32
 
 Den Speedsensor haben wir ja am Calliope bereits ausprobiert. Jetzt nutzen wir ihn am ESP32.
 

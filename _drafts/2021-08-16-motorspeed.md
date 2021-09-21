@@ -1,15 +1,16 @@
 ---
 layout: post
-title:  "Geschwindigkeitkontrolle"
+title:  "Umdrehungen zählen"
 date:   2021-08-16
 tags: Speedsensor Calliope Raspberry 
 ---
 
 Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, das genaue Fahren von Distanzen - z.B. "Fahre 50 cm geradeaus" zu programmieren. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
 
-Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln. Solche sog. Encoder können z.B. sein:
+Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln. Das können z.B. sein:
 * [Hall-Sensoren](https://de.wikipedia.org/wiki/Hall-Sensor)
-* [Lichtschranken](https://de.wikipedia.org/wiki/Lichtschranke)
+* [Drehgeber (Rotary Encoder)](https://de.wikipedia.org/wiki/Drehgeber)
+* [Lichtschranken](https://de.wikipedia.org/wiki/Lichtschranke) mit einer Lochscheibe
 
 Zu letzteren gehört beispielsweise der "Speedsensor LM393 mit Lochscheibe". Enthalten ist auch eine Lochscheibe mit einer Bohrung, die aber nicht auf die Lego-Achsen passt.
 
@@ -18,21 +19,24 @@ Zu letzteren gehört beispielsweise der "Speedsensor LM393 mit Lochscheibe". Ent
 Eine Anleitung findet man hier: 
 [https://joy-it.net/files/files/Produkte/SEN-Speed/SEN-Speed-Anleitung-20201015.pdf](https://joy-it.net/files/files/Produkte/SEN-Speed/SEN-Speed-Anleitung-20201015.pdf)
 
-Der Speedsensor hat vier Anschlüsse, wovon aber nur drei genutzt werden:
+Der Speedsensor hat vier Anschlüsse, wovon aber nur drei benötigt werden:
+
 * VCC - Spannungsversorgung 3,3 bis 5 V
 * GND - Ground
 * D0 - digitales Signal für den Zustand der Schranke
 
-Zur Verwendung mit LEGO-Motoren benötigen wir eine angepasste Lochscheibe. Für erste Experimente nutze ich eine LEGO-Technic-Riemenscheibe. Diese hat 6 Löcher. Bei einer Umdrehung misst man also 6 Wechsel von "Hell auf Dunkel" und 6 Wechsel von "Dunkel auf Hell". Man kann also die Umdrehungszahl auf 1/12 Umdrehung genau bestimmen.
+Der Sensor gibt auf seinem Pin D0 eine 1 aus, wenn sich etwas in der Lichtschranke befindet und eine 0, wenn sich nichts in der Lichtschranke befindet. Platziert man die Lochscheibe in der Lichtschranke und dreht diese (manuell oder durch einen Motor) kann man durch Zählen der Wechsel die Anzahl der Umdrehungen bestimmen.
+
+Zur Verwendung mit LEGO-Motoren benötigen wir eine passende Lochscheibe. Ich nutze  eine LEGO-Technic-Riemenscheibe (4185) mit 6 Löchern. Bei einer Umdrehung misst man also 6 Wechsel von "Offen auf Zu" und 6 Wechsel von "Zu  auf Offen". Man kann also die Umdrehungszahl auf 1/12 Umdrehung genau bestimmen.
 
 Den Speedsensor LM393 habe ich auf einen dünnen Lego Technic Liftarm 1x3 (6632) mit Achslöchern geklebt und zwar so, dass ein Achsloch frei bleibt. Durch dieses kann man dann den Sensor mit Hilfe eine Achse in passendem Abstand um die Lochscheibe herum platzieren.
 
-![Riemenscheibe als Lochscheibe](/images/foto_motor_lochscheibe.jpg) 
+![Riemenscheibe als Lochscheibe](/images/foto_speedsensor_riemenscheibe.jpg) 
 
 
 ## Funktionstest am Calliope
 
-Für den ersten minimalen Testaufbau ohne Geschwindigkeitsveränderung des Motors verwenden wir:
+Für einen Testaufbau ohne Geschwindigkeitsveränderung des Motors verwenden wir:
 
 * die Lego-Batteriebox
 * einen Lego-Motor
@@ -50,11 +54,10 @@ Der Sensor hat vier Ausgänge. Diese verbinden wir wie folgt:
 * Pin VCC am Sensor mit VCC am Calliope
 * Pin GND am Sensor mit GND
 * Pin D0 am Sensor mit C1 am Calliope
-* Pin A0 am Sensor bleibt ungenutzt
 
 ![Anschluss Speedsensor an Calliope](/images/fritzing_calliope_anschluss_speedsensor.png)
 
-Startet man nun den Motor durch Drücken des Schalters an der Batteriebox, so dreht sich die Lochscheibe innerhalb der Lichtschranke. Der Sensor gibt auf seinem Pin D0 eine 1 aus, wenn sich etwas in der Lichtschranke befindet und eine 0, wenn sich nichts in der Lichtschranke befindet.
+Startet man nun den Motor durch Drücken des Schalters an der Batteriebox, so dreht sich die Lochscheibe innerhalb der Lichtschranke. 
 
 Nachfolgendes Programm zählt die Wechsel zwischen 0 und 1 sowie 1 und 0 und berechnet daraus die Umdrehungen. Die Werte werden für den Test auf der seriellen Schnittstelle ausgegeben.
 
@@ -116,7 +119,7 @@ Achtung: Beim Test wurden bei einem schnellen Wechsel zwischen 0 und 1 nicht all
 
 ## Funktionstest am Raspi
 
-Einen vergleichbaren Test kann man auch mit dem Raspi machen. Man verbindet
+Einen einfachen Funktionstest kann man auch mit dem Raspi machen. Man verbindet
 
 * Pin VCC am Sensor mit Pin 3,3 V am Raspi
 * Pin GND am Sensor mit Pin Ground am Raspi
@@ -146,8 +149,7 @@ Wir verwenden hier bei die Klassse DigitalInputDevice aus der gpiozero-Bibliothe
 
 ## Geschwindigkeitsmessung am Raspi
 
-Um die Geschwindigkeit zu messen, platzieren wir die Riemenscheibe als Lochscheibe in die Lichtschranke und treiben diese mit einem Lego-Motor an, der zunächst noch direkt mit der Lego-Batteriebox verbunden ist.
-
+Um die Geschwindigkeit zu messen, platzieren wir die Riemenscheibe als Lochscheibe in die Lichtschranke und treiben diese wieder mit dem Lego-Motor an, der aus der Lego-Batteriebox mit Strom versorgt wird.
 
 ```python 
 from gpiozero import DigitalInputDevice
@@ -173,11 +175,7 @@ while True:
 ```
 Hier werden sowohl das Öffnen als auch das Schließen der Schranke gezählt. Jede Sekunde werden die gezählten Umdrehungen ausgeben und der Zähler anschließen zurückgesetzt.
 
-Mit diesem Verfahren kann man die Drehzahl von Motoren ermitteln und mit anderen Motoren vergleichen
-
-
-## Funktionstest am ESP32
-
+Mit diesem Verfahren kann man die Drehzahl von Motoren ermitteln und mit anderen Motoren vergleichen.
 
 ## Messung zur Steuerung verwenden
 

@@ -1,11 +1,14 @@
 ---
 layout: post
-title:  "Speedsensor zur Motor- und Fahrzeugsteuerung"
+title:  "Raspi-Fahrzeug mit Speedsensor"
 date:   2021-09-16
 tags: Speedsensor Robot Raspberry Beispielfahrzeug
 ---
 
-Bei diesem Fahrzeug wird jedes der beiden Räder von einem Motor angetrieben. An jedem der beiden Motoren ist ein Speedsensor LM393 angebracht. Hinten hat es eine einfache Stütze.
+
+Dieses Fahrzeug baut auf dem [Raspi-Fahrzeug mit zwei Antriebsmotoren]{% post_url 2021-09-18-raspi-car-gpiozero%}) auf.
+
+Auch bei diesem Fahrzeug wird jedes der beiden Räder von einem Motor angetrieben. Zusätzlich ist an jedem der beiden Motoren ist ein Speedsensor LM393 angebracht. Hinten hat es eine einfache Stütze.
 
 Durch den Speedsensor kann die Anzahl der Umdrehungen jedes Motors gemessen werden. Dadurch kann das Fahrzeug eine vorab bestimmte Strecke fahren bzw. sich um einen vorab festgelegten Winkel drehen. 
 
@@ -15,7 +18,7 @@ Durch den Speedsensor kann die Anzahl der Umdrehungen jedes Motors gemessen werd
 
 Man braucht dafür:
 * 1 Lego-Batteriebox
-* 2 Lego M-Motor
+* 2 Lego M-Motoren
 * 1 Step-Down-Konverter
 * 1 Motortreiber L298
 * 1 Raspberry Pi Zero
@@ -34,7 +37,7 @@ Oben sind Raspi-Zero, Step-Down-Konverter und Motortreiber im Prototyp mit Gummi
 
 ![Foto Fahrzeug Fahrzeug von oben](/images/foto_fahrzeug_speedsensor_oben.jpg)
 
-Der Raspi steuert die über je zwei Kabel am Motortreiber L298 angeschlossenen Motoren. Geschwindigkeitsänderungen können beim L298 entweder über ein PWM-Signal an den beiden IN-Eingängen eines Motors oder über ein PWM-Signal am EN-Eingang erreicht werden. Da bei der Nutzzung von `gpiozero` sowieso das PWM-Signal an den IN-Eingängen verwendet wird, benötigen wir keine Verbindung vom Raspi zu den EN-Eingängen, sondern können diese durch Setzen der Jumper auf 'enabled' setzen.
+Der Raspi steuert die über je zwei Kabel am Motortreiber L298 angeschlossenen Motoren. Geschwindigkeitsänderungen können beim L298 entweder über ein PWM-Signal an den beiden IN-Eingängen oder über ein PWM-Signal am EN-Eingang erreicht werden. Da bei der Nutzzung von `gpiozero` sowieso das PWM-Signal an den IN-Eingängen verwendet wird, benötigen wir keine Verbindung vom Raspi zu den EN-Eingängen, sondern können diese durch Setzen der Jumper auf 'enabled' setzen.
 
 Die Stromversorgung der beiden Speedsensoren (3,3 V und Ground) läuft über das kleine Breadboard vorne. Die D0-Pins der Speedsensoren werden mit den GPIO-Eingängen des Raspi verbunden.
 

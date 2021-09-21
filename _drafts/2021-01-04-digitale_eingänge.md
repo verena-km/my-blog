@@ -81,9 +81,9 @@ while True:
 
 ## Ausführen einer Callback-Funktion beim Wechsel von 0 auf 1
 
-Anstatt in einer Schleife den am Eingang anliegeden Wert laufend abzufragen und dabei zu prüfen, ob dieser sich gändert hat, kann man in auch einen Interrupt registrieren, der auf den Wechsel mit der Ausführung einer sog. Callback-Funktion reagiert.
+Anstatt in einer Schleife den am Eingang anliegeden Wert laufend abzufragen und dabei zu prüfen, ob dieser sich gändert hat, kann man auch Callback-Funktion funktionen verwenden, die bei bestimmten Ereignissen ausgeführt werden.
 
-Ein Problem bei Tastern ist möglicherweise das [Prellen (Bouncing)](https://www.mikrocontroller.net/articles/Entprellung). Es kann dazu führen, dass der Interrupt und damit die Callback-Funktion zu häufig ausgeführt werden.
+Ein Problem bei Tastern ist möglicherweise das [Prellen (Bouncing)](https://www.mikrocontroller.net/articles/Entprellung). Es kann dadurch zu mehreren Events kommen und die Callback-Funktion damit zu häufig ausgeführt werden.
 
 ### Python / RasperryPi
 
