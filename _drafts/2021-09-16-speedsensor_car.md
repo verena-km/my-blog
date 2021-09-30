@@ -6,7 +6,7 @@ tags: Speedsensor Robot Raspberry Beispielfahrzeug
 ---
 
 
-Dieses Fahrzeug baut auf dem [Raspi-Fahrzeug mit zwei Antriebsmotoren]{% post_url 2021-09-21-raspi-car-gpiozero%}) auf.
+Dieses Fahrzeug baut auf dem [Raspi-Fahrzeug mit zwei Antriebsmotoren]({% post_url 2021-09-21-raspi-car-gpiozero%}) auf.
 
 Auch bei diesem Fahrzeug wird jedes der beiden Räder von einem Motor angetrieben. Zusätzlich ist an jedem der beiden Motoren ist ein Speedsensor LM393 angebracht. Hinten hat es eine einfache Stütze.
 
