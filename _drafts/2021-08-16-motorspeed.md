@@ -5,14 +5,9 @@ date:   2021-08-16
 tags: Speedsensor Calliope Raspberry 
 ---
 
-Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, festgelegte Distanzen (z.B. 50 cm vorwärts) zu faharen. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
+Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, festgelegte Distanzen (z.B. 50 cm vorwärts) zu fahren. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
 
-Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln. Das können z.B. sein:
-* [Hall-Sensoren](https://de.wikipedia.org/wiki/Hall-Sensor)
-* [Drehgeber (Rotary Encoder)](https://de.wikipedia.org/wiki/Drehgeber)
-* [Lichtschranken](https://de.wikipedia.org/wiki/Lichtschranke) mit einer Lochscheibe
-
-Zu letzteren gehört beispielsweise der "Speedsensor LM393 mit Lochscheibe". Enthalten ist auch eine Lochscheibe mit einer Bohrung, die aber nicht auf die Lego-Achsen passt.
+Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln, beisielsweise eine Lichtschranke mit Lochscheibe, wei beispielsweise der "Speedsensor LM393 mit Lochscheibe". Die mitgelieferte Loschscheibe passt jedoch nicht auf die Lego-Achse.
 
 ![Bild Sensor mit Lochscheibe](/images/foto_speedsensor_scheibe.jpg)
 
@@ -27,7 +22,7 @@ Der Speedsensor hat vier Anschlüsse, wovon aber nur drei benötigt werden:
 
 Der Sensor gibt auf seinem Pin D0 eine 1 aus, wenn sich etwas in der Lichtschranke befindet und eine 0, wenn sich nichts in der Lichtschranke befindet. Platziert man die Lochscheibe in der Lichtschranke und dreht diese (manuell oder durch einen Motor) kann man durch Zählen der Wechsel die Anzahl der Umdrehungen bestimmen.
 
-Zur Verwendung mit LEGO-Motoren benötigen wir eine passende Lochscheibe. Ich nutze  eine LEGO-Technic-Riemenscheibe (4185) mit 6 Löchern. Bei einer Umdrehung misst man also 6 Wechsel von "Offen auf Zu" und 6 Wechsel von "Zu  auf Offen". Man kann also die Umdrehungszahl auf 1/12 Umdrehung genau bestimmen.
+Zur Verwendung mit LEGO-Motoren benötigen wir eine passende Lochscheibe. Man kann z.B. die LEGO-Technic-Riemenscheibe (4185) mit 6 Löchern verwenden Bei einer Umdrehung misst man also 6 Wechsel von "Offen auf Zu" und 6 Wechsel von "Zu  auf Offen". Man kann also die Umdrehungszahl auf 1/12 Umdrehung genau bestimmen.
 
 Den Speedsensor LM393 habe ich auf einen dünnen Lego Technic Liftarm 1x3 (6632) mit Achslöchern geklebt und zwar so, dass ein Achsloch frei bleibt. Durch dieses kann man dann den Sensor mit Hilfe eine Achse in passendem Abstand um die Lochscheibe herum platzieren.
 
@@ -179,4 +174,4 @@ Mit diesem Verfahren kann man die Drehzahl von Motoren ermitteln und mit anderen
 
 ## Messung zur Steuerung verwenden
 
-Man kann natürlich auch die gemessenen Werte verwenden, um den Motor zu steuern, also beispielsweise einen Motor nur eine zuvor festgelegte Anzahl von Umdrehungen durchführen lassen oder ein Fahrzeug damit eine bestimmte Strecke vorwärts fahren lassen. Hierzu mehr in einem weiteren Post.
+Man kann natürlich auch die gemessenen Werte verwenden, um den Motor zu steuern, also beispielsweise einen Motor nur eine zuvor festgelegte Anzahl von Umdrehungen durchführen lassen oder ein Fahrzeug damit eine bestimmte Strecke vorwärts fahren lassen. 
