@@ -242,7 +242,7 @@ p0.irq(trigger=Pin.IRQ_FALLING, handler=callback)
 
 Mit der Methode `irq()` der Klasse Pin legt man einen solchen Interrupt fest und definiert mit `trigger`, ob er bei beim Wechsel von 0 nach 1 (Pin.IRQ_RISING) beim Wechsel von 1 nach 0 (Pin.IRQ_FALLING) oder bei beidem (Pin.IRQ_FALLING\|Pin.IRQ_RISING) ausgeführt werden soll. Als Parameter `handler` wird die Callback-Funkton angegeben, die ausgeführt werden soll, wenn das entsprechende Ereignis stattfindet. Die Callback-Funktion hat als einigen Parameter den Pin, der die Funktion ausgelöst hat.
 
-Für die Interrupt-Handler gibt es einiges zu beachten, siehe hierzu die [Micro-Python-Dokumentation](https://docs.micropython.org/en/latest/reference/isr_rules.html). So sollten die Callback-Funktionen keine zeitaufwändigen Dinge tun. Auch ein `print`-Statement (wie oben) ist eingentlich zu langsam.
+Für die Interrupt-Handler gibt es einiges zu beachten, siehe hierzu die [Micro-Python-Dokumentation](https://docs.micropython.org/en/latest/reference/isr_rules.html). So sollten die Callback-Funktionen keine zeitaufwändigen Dinge tun. Auch ein `print`-Statement (wie oben) ist eigentlich zu langsam.
 
 Was nicht geht, ist für RISING und FALLING getrennte IRQs zu definiert. Es wird nur einer ausgeführt.
 

@@ -129,3 +129,30 @@ Ultraschallsensor auf Servo
 https://www.youtube.com/watch?v=FbH-GmGmUJo&list=PL4dxj1rGc3b3quCIK94fQp-H4NV6FXK2F&index=7
 
 https://github.com/Aircoookie/WLED
+https://www.control-led.de/init/default/show_post/15/Python-RaspberryPi/LED-Strip-Animationen-und-Effekte-mit-Python-programmieren
+https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/ 
+https://www.reddit.com/r/arduino/comments/9jr24k/is_there_a_website_with_a_bunch_of_neopixel/
+
+https://www.ledfx.app/
+- braucht einen PC
+
+WLED mit LED
+https://github.com/atuline/WLED/
+- braucht  MAX4466, MAX9814, MAX9184, INMP401, INMP441 (for ESP32) and line-in
+
+https://www.reichelt.de/de/de/entwicklerboards-mikrofonverstaerker-max4466-debo-amp-mic-p235481.html?r=1
+https://www.reichelt.de/entwicklerboards-mikrofonverstaerker-max9814-debo-amp-mic2-p235484.html?&trstct=pos_0&nbc=1
+https://www.conrad.de/de/p/adafruit-1063-erweiterungsboard-1-st-1516567.html
+https://www.conrad.de/de/p/adafruit-1713-erweiterungsboard-1-st-1516571.html
+
+oder bei AZ-Delivery
+
+AKKU
+SAM 18650 35E S
+
+https://www.az-delivery.de/products/battery-expansion-shield-18650-v3-inkl-usb-kabel#description
+
+Idee:
+Effekte mit Micropyhton auf Neopixel
+
+https://www.reichelt.de/entwicklerboards-spannungswandler-level-shifter-txb0104-debo-lev-shifter-p239275.html?&trstct=pos_0&nbc=1

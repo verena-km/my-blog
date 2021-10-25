@@ -1,9 +1,12 @@
 ---
 layout: post
 title:  "Abstandsmessung mit dem Ultraschallsensor"
-date:   2021-09-22
+date:   2021-10-25
 tags: Ultraschallsensor Raspberry
 ---
+
+* TOC
+{:toc}
 
 Mit einem Ultraschallsensor können Abstände gemessen werden. Verbreitet ist der Ultraschallsensor HC-SR04.
 
@@ -19,8 +22,9 @@ Ich nutze den HC-S05. Er hat noch einen Anschluss mehr, man ihn aber wie einen H
 Der Sensor funktioniert vereinfacht wie folgt:
 
 Durch Setzen des Trigger-Pins auf 1 für 0,01 ms verschickt der Sensor einen Puls von Ultraschallwellen. Werden diese von einem Objekt in einer bestimmten Entfernung reflektiert, erkennt ein Empfänger im Sensor dieses Echo. Danach geht liegt am Echo-Pin für einen bestimmten Zeitraum ein Wert von 1 an. Aus der Zeitdauer dieses Echo-Pulses kann dann mit Hilfe der Schallgeschwindigkeit der Abstand berechnet werden:
-
+```
 Entfernung = Laufzeit * Schallgeschwindigkeit / 2
+```
 
 Eine genauere Beschreibung ist beispielsweise hier zu finden:
 * [http://www.netzmafia.de/skripten/hardware/RasPi/Projekt-Ultraschall/index.html](http://www.netzmafia.de/skripten/hardware/RasPi/Projekt-Ultraschall/index.html)
@@ -44,8 +48,9 @@ Die Widerstände werden für einen Spannungsteiler benötigt. Dadurch wird siche
 
 Die maximal an GPIO-Eingang anliegende Spannung kann man wie folgt berechnen:
 
-U = 5 / (470 Ω + 330 Ω) * 470 Ω = 3 V
-
+```
+U = 5 V / (470 Ω + 330 Ω) * 470 Ω = 3 V
+```
 
 ### Programmierung mit RPi.GPIO
 
@@ -154,15 +159,6 @@ Damit er immer gleich nach dem Systemstart läuft, kann man ihn enablen:
 sudo systemctl enable pigpiod
 ```
 
-## Steuerung mit dem Calliope
-
-http://micoro.de/calliope-mit-ultraschallsensor-hc-sr04/
-
-### Aufbau und Komponenten
-
-### Programmierung
-
-
 
 ## Steuerung mit dem ESP32 
 
@@ -173,7 +169,7 @@ Man braucht:
 * ein Widerstand 470 Ω
 * ein Widerstand 330 Ω
 
-![Schaltplan Ultraschallsensor](/images/fritzing_ultraschallsensor.png)
+![Schaltplan Ultraschallsensor](/images/fritzing_esp32_ultraschallsensor.png)
 
 Die Widerstände werden für einen Spannungsteiler benötigt. Dadurch wird sichergestellt, dass der GPIO-Eingänge des ESP-32 nicht mehr als 3,3 V bekommt.
 
@@ -241,3 +237,13 @@ while True:
 Alternativ kann man die fertige Klasse HCSR04 aus folgendem Github Repository verwenden:
 
 * [https://github.com/rsc1975/micropython-hcsr04](https://github.com/rsc1975/micropython-hcsr04)
+
+
+## Steuerung mit dem Calliope
+
+Da der Calliope keinen 5V-Ausgang hat und mein Ultraschallsensor 5V benötigt, kann man ihn leider nicht direkt am Calliope betreiben.
+
+Lösungmöglichkeiten sind:
+- Nutzung eines Ultraschallsensors für 3,3 Volt
+- externe Stromversorgung für den Ultraschallsensor
+- Einatz eines Level-Shifters
