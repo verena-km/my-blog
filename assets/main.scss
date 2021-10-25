@@ -28,5 +28,25 @@
   .PageNavigation .next {
     text-align: right;
   }
+
+  #markdown-toc::before {
+    content: "Inhaltsverzeichnis:";
+    line-height: 200%;
+    font-weight: bold;
+  }
+
+  #markdown-toc {
+
+    border-radius: 5px;
+    list-style-type: none;
+    background-color: rgba(194, 212, 226, 0.705);
+    padding: 20px;
+    float: right;
+  }
+
+  #markdown-toc ul{
+    list-style-type: none;
+    margin-bottom: 10px;
+  }
   
 
