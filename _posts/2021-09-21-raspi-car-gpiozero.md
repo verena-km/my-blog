@@ -9,7 +9,7 @@ Dieses Raspi-Fahrzeug mit zwei Antriebsmotoren soll als Grundlage für verschied
 
 Wir nutzen dafür die Klasse `Robot` aus der [gpiozero-Bibliothek](https://gpiozero.readthedocs.io) . Die Klasse Robot ist für Fahrzeuge gedacht, bei denen jedes der beiden Antriebsräder von einem Motor angetrieben wird und bei Bedarf Stützräder zum Einsatz kommen.
 
-Bereits beim [Fahrzeug mit Lenkung]({%post_url 2021-02-22-beispielfahrzeug-lenkung%}) habe ich die Klasse Motor aus der gpiozero-Bibliothekverwendet.
+Bereits beim [Fahrzeug mit Lenkung]({%post_url 2021-02-22-beispielfahrzeug-lenkung%}) habe ich die Klasse Motor aus der gpiozero-Bibliothek verwendet.
 
 
 ![Foto Fahrzeug mit zwei Antriebsmotoren](/images/foto_fahrzeug_2m.jpg)

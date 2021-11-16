@@ -47,7 +47,7 @@ https://www.mitp.de/IT-WEB/LEGO-und-Elektronik.html
 + Schöner Python-Code
 - Motor nicht an Lego-Achse
 
-## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren.  von Ingmar Stapel
+## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren von Ingmar Stapel
 
 Im Buch werden Fahrzeuge mit dem Raspi gebaut, verwendet werden u.a.:
 - Stromversorgung über Akku / Batterien mit Step-down-converter
@@ -67,7 +67,6 @@ Nach einem kurzen Abstecher über die Programmierung mit Scratch folgen Programm
 Das Live-Videostreaming wird mit mjpg-streamer realisiert, eine Web-Fernsteuerung über Flask.
 
 Desweiteren gibt es eine Einführung in Threads und Programme die Threads bei der Steuerung über Gyroskop und Kompass sowie bei der Nutzung des Abstandssensors verwenden.
-
 
 Download von Bauanleitungen und Code
 www.rheinwerk-verlag.de/4812 - Toy Story

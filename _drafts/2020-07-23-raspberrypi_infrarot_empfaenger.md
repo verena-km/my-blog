@@ -132,3 +132,23 @@ $sudo systemctl start irexec
 
 Weitere Details zu LIRC sind hier zu finden 
 [http://www.netzmafia.de/skripten/hardware/RasPi/Projekt-IR-Fernsteuerung/index.html](http://www.netzmafia.de/skripten/hardware/RasPi/Projekt-IR-Fernsteuerung/index.html)
+
+
+
+ir-keytable
+
+https://blog.gordonturner.com/2020/05/31/raspberry-pi-ir-receiver/
+https://peppe8o.com/setup-raspberry-pi-infrared-remote-from-terminal/
+
+
+https://www.instructables.com/Easy-Setup-IR-Remote-Control-Using-LIRC-for-the-Ra/
+
+https://ccse.kennesaw.edu/outreach/raspberrypi/_handouts/ir_receiver.pdf
+
+https://blog.heimetli.ch/raspberry-infrarot-lirc.html
+
+https://askubuntu.com/questions/1272907/reading-ir-codes-from-input-events
+
+https://forum.ubuntuusers.de/topic/infrarot-events-lesen/
+
+https://github.com/peterhinch/micropython_ir

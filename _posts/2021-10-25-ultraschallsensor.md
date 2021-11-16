@@ -16,8 +16,9 @@ Er hat vier Anschlüsse:
 * Trigger
 * Echo
 
-
 Ich nutze den HC-S05. Er hat noch einen Anschluss mehr, man ihn aber wie einen HC-SR04 nutzen.
+
+![Foto Ultraschallsensor](/images/foto_ultraschallsensor_breadboard.jpg)
 
 Der Sensor funktioniert vereinfacht wie folgt:
 
@@ -125,7 +126,7 @@ while True:
     sleep(1)
 ```
 
-Zusätzlich hat man die Möglichkeit callback-Funktionen festzulegen, die ausgeführt werden, wenn die Distanz unter einen bestimmten Wert sinkt, bzw. über diesen Wert steigt:
+Zusätzlich hat man die Möglichkeit callback-Funktionen festzulegen, die ausgeführt werden, wenn die Distanz unter einen bestimmten Wert sinkt (`when_in_range`), bzw. über diesen Wert steigt(`when_out_of_range`). Die `threshhold_distance` gibt dabei den Grenzwert in Metern an.
 
 ```python
 from gpiozero import DistanceSensor
@@ -144,12 +145,12 @@ sensor.when_out_of_range = out_range_func
 pause()
 ```
 
-Nutzt man gpiozero, sollte man für bessere Messergebnisse den `pigpiod` aktivien. Falls er noch nicht installiert ist, muss man ihn zunächst installieren
+Nutzt man gpiozero, sollte man für bessere Messergebnisse den `pigpiod` aktivien. Falls er noch nicht installiert ist, muss man ihn zunächst installieren:
 ```
 sudo apt-get install pigpio
 ```
 
-Dann kann man ihr aktivieren:
+Dann kann man ihn aktivieren:
 ```
 sudo systemctl start pigpiod
 ```
