@@ -8,34 +8,41 @@ tags: Calliope Servomotor Geekservo Fernsteuerung
 * TOC
 {:toc}
 
-Klein und beweglich ist dieses ferngesteuerte Calliope-Fahrzeug. Das Fahrgestell ist aus Lego Technic, für den Antrieb werden zwei grüne 360-Grad-Geek-Servomotoren verwendet. Die Steuerung übernimmt ein Calliope Mini. Für die Fernsteuerung wird einer zweiter Calliope Mini genutzt, dabei nutzen wir den integrierten Neigungssensor. 
+Klein und beweglich ist dieses ferngesteuerte Calliope-Fahrzeug. Das Fahrgestell ist aus Lego Technic, für den Antrieb werden zwei grüne 360-Grad-Geek-Servomotoren verwendet. Die Steuerung übernimmt ein Calliope Mini. Ferngesteuert wird mit einem zweiten Calliope Mini und dessen integrierten Neigungssensor. 
 
-Es ist damit die kleinere Variante des [mit dem Calliope gesteuerten Stunt Racer]({% post_url 2020-09-19-calliope_steuert_calliope %}).
+![Callipe Minicar](/images/foto_calliope_minicar.jpg)
 
+Es ist damit die kleinere Variante des [mit dem Calliope gesteuerten frühren Prototyp]({% post_url 2020-09-19-calliope_steuert_calliope %}).
+
+Die Calliope-Stromversorgung mit den 2 AAA-Batterien war für das Fahrzeug zu schwach, daher hatten wir diese zunächst mit einer 9-Volt-Batterie und dem Stepdown-Konverter realisiert. Die Batterien waren aber schnell leer. Nun kommt ein 18650 Li-Ion-Akku in einem Expansion Shield zum Einsatz.
 
 ## Komponenten und Aufbau
 
-
 Man braucht dafür:
-* 1 9V-Batterie
+* 1 18650 Li-Ion-Akku
+* 1 18650 Battery Expansion Shield
 * 2 grüne Geek-Servo-Motoren (360-Grad-Servos)
-* 1 Step-Down-Konverter
 * 1 USB-Kabel
 * 2 Calliope Mini
-* 1 Calliope Mini Batteriebox mit 2AAA-Batterien
+* 1 Calliope Mini Batteriebox mit 2 AAA-Batterien
 * und diverse Lego-Technic-Teile
 
 Das Fahrzeug hat zwei von den Geek-Servos angetriebene Räder und ein Stützrad.
 
-Über den Step-Down-Konverter wird der Calliope Mini über USB mit Strom aus der 9-Volt-Batterie versorgt.
+Über das Expansion Shield wird der Calliope Mini über USB mit Strom aus dem 18650 Li-Ion-Akku versorgt.
 Der Calliope steurt über zwei Ausgänge die grünen Geek-Servos ([siehe auch Post zu den Geekservos]({% post_url 2021-02-01-geekservo %})), die die Räder antreiben.
 
-![Schaltplan Mini-Robot-Car](/images/fritzing_calliope_minicar.png)
+![Schaltplan Mini-Robot-Car](/images/fritzing_calliope_minicar2.png)
 
 
 ## Programmierung
 
+TODO: Programme überarbeiten
+
 Es werden zwei Programme benötigt. Eins für den Calliope am Fahrzeug (Empfänger) und eins für die Fernbedienung.
+
+
+
 
 Der Javascript-Code aus Makecode für das Fahrzeug sieht wie folgt aus:
 
@@ -73,33 +80,7 @@ Man kann ihn per Copy & Paste in MakeCode einfügen und dann auf den Calliope ü
 
 Die Fernsteuerung läuft mit folgendem Javascript-Code:
 
-radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 12) {
-        basic.setLedColor(0x00ff00)
-        radio.sendNumber(0)
-    }
-    if (receivedNumber == 1) {
-        servos.P0.run(100)
-        servos.P3.run(-100)
-    }
-    if (receivedNumber == -1) {
-        servos.P0.run(-100)
-        servos.P3.run(100)
-    }
-    if (receivedNumber == 2) {
-        servos.P0.run(100)
-        servos.P3.run(100)
-    }
-    if (receivedNumber == 3) {
-        servos.P0.run(-100)
-        servos.P3.run(-100)
-    }
-})
-basic.setLedColor(0xff0000)
-radio.setGroup(173)
-
-
-
+```javascript
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 12) {
         basic.setLedColor(0x00ff00)
@@ -128,3 +109,4 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 basic.setLedColor(0xff0000)
 radio.setGroup(173)
+```

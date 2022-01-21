@@ -75,6 +75,64 @@ www.rheinwerk-verlag.de/4812 - Toy Story
 - Code nicht objektorientiert
 - nicht speziell Lego
 
+## Heimautomation mit Arduino, Raspberry Pi und ESP8266
+
+Im Buch werden Arduino-Boards als Sensor und Aktor und ein Raspberry Pi als Zentraleinheit zur Datenverarbeitung und Darstellung genutzt und zunächst deren grundsätzliche Nutzung erläutert.
+
+Danach wird Boards mit dem ESP8266 und deren Programmierung übr die Arduino-IDE vorgestellt.
+
+Desweiteren wird die Tasmota-Firmware vorgestellt, mit der insbesondere auch fertige Smarthome-Geräte mit ESP8266 geflashed werden können. Die Geräte können danach ins eigene WLAN aufgenommen und anschließend über HTTP konfiguriert und gesteuert werden.
+
+Weiter wird das Protokoll MQTT vorgestellt und der MQTT-Broker Mosquitto auf dem Raspberry Pi installiert und die Nutzung von Arduino und ESP8366 als MQTT-Client demonstriert.
+
+Ein weiteres Kapitel widmet sich der Ntzung des grafischen Werkzeugs Node-RE.
+
+Anschließend wird der Betrieb von verschiedenen Sensoren (Temperatursensor NTC, Helligkeitsensor BH1750, Umweltsensor SHT31, Baromenter BME680) am Arduino beschrieben.
+
+Ein Kapitel widnemt sich auch der Datenübertragung via 433 MHz-Funknetz.
+
+Es folgen eine Reihe von Praxisbeispielen:
+* Ausgänge schalten
+* Fernbedienung für Fernseher (Infrarotsender / -empfänger TSOP4838)
+* Drahtlose Klingel
+* A/D-Wandler
+* Briefkastenwächter (mit Infrarotlichtschranke und 433MHz-Funk)
+
+Danach werden die Smarthome-Plattformfen Home Assistant und openHAB vorgestellt.
+
+Das Buch schließst mit einigen Projekten:
+* Aquarium-Timer
+* Stromwächter mit Sonsoff Pow bzw. Stromsensor SCT-013-030
+* Waschmaschinenwächter (mit Fotowiderstand)
+* Gefrierschrankwächter 
+* Neopixel steuern (mit Tasmota)
+
+Schwerpunkte liegen auf Node-Red und auf Kommunikation via 433 MHz.
+
+## Roboter bauen und programmieren für Kids von Florian Schäfer
+
+1. Auflage 2020
+
+Nach dem Einstieg mit einem Bürsten-Käfer, werden der Arduino und die Programmierung des Arduino über die OpenRoberta-Oberfläche erläutert (Nepo4Arduino). 
+
+* Motoren angeschlossen über L298
+* Stromversorgung 9V-Block
+* Speed Encoder HC-020K
+* Sensor-Shield
+* Buzzer
+* LED
+* Microschalter (Collision Limit switch)
+* Linienfolger
+* Helligkeitssensor (LDR LM393)
+* Ultraschallsensor
+* Servomotoren
+* Roboterarm aus vier Servomotoren
+* "Zweibeiner" mit vier Servomotoren
+
+## Motorsteuerung mit Arduino und Raspberry Pi von Dogan Ibrahim
+
+unübersicht
+
 
 
 ##  FRANZIS LEGO® für echte Kerle: LEGO®-Steine mit Elektronik zum Leben erwecken. von E.F. Engelhardt
