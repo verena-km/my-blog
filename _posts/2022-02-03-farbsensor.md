@@ -1,9 +1,13 @@
 ---
 layout: post
 title:  "Farbsensor TCS34725"
-date:   2022-01-22 
+date:   2022-02-03
 tags: Farbsensor I2C Raspberry
 ---
+
+* TOC
+{:toc}
+
 
 Zur Erkennung von Farben kann man einen Farbsensor verwenden, beispielsweise den "Debo Sens Color" mit dem TCS34725-Chip.
 
