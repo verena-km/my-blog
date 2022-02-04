@@ -2,7 +2,7 @@
 layout: post
 title:  "Magnetfeldmesser / Kompassmodul"
 date:   2021-11-24 
-tags: Magnetfeldsensor I2C
+tags: Magnetfeldsensor I2C Raspberry
 ---
 
 * TOC
@@ -87,7 +87,7 @@ Das Mode-Register legt den Mess-Modus des Geräts fest. Es gibt einen Contiuous-
 Das Status-Register enthält Statusanzeigen für das Gerät.
 
 
-###  Magnetfeldsensor HMC5883L am Raspberry Pi
+##  Magnetfeldsensor HMC5883L am Raspberry Pi
 
 Wir schließen den Sensor wie folgt an den Raspberry Pi an:
 
@@ -115,7 +115,7 @@ $ i2cdetect -y 1
 ```
 sieht man, dass der Sensor an Adresse `1e` angeschlossen ist
 
-#### Beispiele und Biblotheken
+### Beispiele und Bibliotheken
 
 Für den Rasperry Pi sind im Intenet mehrere Beispiele und Bibliotheken zu finden. Einige basieren auf `smbus`, andere auf anderen Biblotheken. Unterschiede liegen zudem darin, welche Funktionen des Sensors (z.B. Skalierung) umgesetzt sind und ob Werte wie z.B. die Kompassausrichtung berechnet werden.
 
@@ -137,7 +137,7 @@ Hier einige Bibliotheken die auf `smbus` basieren.
 Folgendes Projekt enthält auch Code zum Kalibrieren des Kompasses, allerdings ist es für den QMC5883L: [https://github.com/RigacciOrg/py-qmc5883l](https://github.com/RigacciOrg/py-qmc5883l)
 
 
-#### Eigene Umsetzung
+### Eigene Umsetzung
 
 Auf Basis der oben genannten Beispiele und Projekte habe ich eine eigene Klase für den HMC588L erstellt.
 
@@ -363,7 +363,7 @@ if __name__ == "__main__":
 ```
 
 
-#### Kalibrierung
+### Kalibrierung
 
 Zum Kalibrieren habe ich die Skripte von [RigacciOrg / py-qmc5883l](https://github.com/RigacciOrg/py-qmc5883l/tree/master/calibration) verwendet. Dabei muss man im Skript `2d-calibration-get-samples` als Sensor ein Objekt der Klasse `HMC588L` statt eines der Klasse `QMC5883L` erzeugen, ansonsten kann man gemäß der Anleitung vorgehen:
 
@@ -402,7 +402,7 @@ if __name__ == "__main__":
         sleep(1)
 ```
 
-#### Alternative Kalibrierung
+### Alternative Kalibrierung
 
 Bei der Nutzung des Sensors als Kompass zeigten sich trotz der Kalibrierung noch Probleme: Richtet man den Kompass jeweils in bestimmten Winkeln z.B. nach den Himmelsrichtungen 0°, 90°, 180° und 270° aus, so weichen die vom Sensor gemessenen Winkel zum Teil erheblich davon ab. 
 
@@ -644,30 +644,3 @@ if __name__ == "__main__":
 
         sleep(1)
 ```
-
-### ESP32 / Micropython
-
-https://github.com/gvalkov/micropython-esp8266-hmc5883l
-https://forum.micropython.org/viewtopic.php?t=7936
-
-
-## Calliope
-
-
-
-## Arduino
-
-https://esphome.io/api/hmc5883l_8cpp_source.html
-https://www.instructables.com/Configure-read-data-calibrate-the-HMC5883L-digital/
-
-
-
-
-
-Kalibrieren
-
-https://www.youtube.com/watch?v=MinV5V1ioWg
-
-https://thecavepearlproject.org/2015/05/22/calibrating-any-compass-or-accelerometer-for-arduino/
-https://appelsiini.net/2018/calibrate-magnetometer/
-https://github.com/kriswiner/MPU6050/wiki/Simple-and-Effective-Magnetometer-Calibration
