@@ -37,7 +37,9 @@ Die gemessenen Werte können über die Einstellungen von Verstärkung (Gain) und
 Das Datenblatt für den Sensor ist [hier](https://cdn-shop.adafruit.com/datasheets/TCS34725.pdf) zu finden.
 
 
-## Anschluss an den Raspberry Pi
+## Verwendung am Raspberry Pi
+
+###  Anschluss 
 
 Der Sensor wird über I2C am Raspi angeschlossen.
 * Raspi Pin 3 an SDA
@@ -49,7 +51,7 @@ Für die Programmierung mit dem Raspberry Pi gibt es folgende Möglichkeiten:
 * Verwendung der Circuit-Python-Bibliothek adafruit-circuitpython-tcs34725
 * direkte Nutzung mit smbus
 
-## Nutzung Adafruit Blinka
+### Nutzung Adafruit Blinka
 
 Vom Unternehmen Adafruit gibt es ein Fork von MicroPython namens CircuitPython. Adafruit stellt CircuitPython für eine Reihe von Microcontroller-Boards zur Verfügung. Für viele Elektronikkomponenten - auch für den TCS34725 - hat Adafruit Bibliotheken für CircuitPython entwickelt, so auch für den TCS34725.
 
@@ -105,7 +107,7 @@ Heise-Artikel zu Circuit-Python auf dem Raspi
 [https://m.heise.de/make/artikel/Ausprobiert-CircuitPython-auf-dem-Raspberry-Pi-4436550.html?seite=all](https://m.heise.de/make/artikel/Ausprobiert-CircuitPython-auf-dem-Raspberry-Pi-4436550.html?seite=all)
 
 
-## Nutzung direkt mit smbus
+### Nutzung direkt mit smbus
 
 Will man Adafruit-Blinka nicht nutzen, kann man auch mit der smbus-Bibliothek mit dem Sensor kommunizieren. 
 
@@ -113,7 +115,7 @@ Beispielcode dafür gibt es unter [http://www.pibits.net/amp/code/raspberry-pi-a
 
 Mit diesem Beispielcode erhält man die Rohdaten des Sensors und man kann die Werte für die "Gain" und "Integration-Time" verändern.
 
-## Praktische Nutzung
+### Praktische Nutzung
 
 Je nach Aufgabenstellung will man zumeist
 * vorgegebene Farben oder Farbbereiche erkennen oder
@@ -129,7 +131,7 @@ Für meine Test habe ich farbige Papierstücke genutzt und diese jeweils 2 mm ob
 
 ![Foto Farbsensor Test](/images/foto_farbsensor_messung.jpg)
 
-## Beispiel 1: Erkennung bestimmter vorher festgelegter Farbwerte
+### Beispiel 1: Erkennung bestimmter vorher festgelegter Farbwerte
 
 Mit folgendem auf der Adafruit-Bibliothek basierendem Programm kann man zunächst interaktiv bestimmte Farbnamen und Werte einlesen. Gibt man "q" ein, werden die Werte abgespeichert. Danach wird der Sensorwert alle zwei Sekunden ermittelt und angezeigt. Zu dem Sensorwert wird aus der eingelesenen bzw. gespeicherten Liste die ähnlichste Farbe ermittelt und deren Name ausgegeben.
 
@@ -221,7 +223,7 @@ if __name__ == "__main__":
 
 ```
 
-## Beispiel 2: Ausgabe der vom Sensor gemessen Farbe im Terminal
+### Beispiel 2: Ausgabe der vom Sensor gemessen Farbe im Terminal
 
 Um Farben im Terminal anzuzeigen kann man das Python-Package [sty](https://sty.mewo.dev/index.html) verwenden. Auszugebende Strings kann man damit mit den für die jeweilige Farbe erforderlichen Escape-Sequenz versehen.
 
@@ -249,6 +251,18 @@ Die Ausgabe sieht dann wie folgt aus:
 ![Screenshot Farbsensor](/images/screenshot_farbsensor.png)
 
 
+## Verwendung am Calliope Mini
+
+Erweiterungen für Makecode gibt es hier (noch nicht getestet):
+
+[https://mkleinsb.github.io/pxt-columbuseye/](https://mkleinsb.github.io/pxt-columbuseye/)
+[https://github.com/samnied/pxt-tcs34725](https://github.com/samnied/pxt-tcs34725)
+
+
+## Verwendung mit Micropython am ESP32
+
+Beispiel hier (auch noch nicht getestet):
+[https://techtotinker.blogspot.com/2021/04/033-micropython-technotes-tcs34725-rgb.html](https://techtotinker.blogspot.com/2021/04/033-micropython-technotes-tcs34725-rgb.html)
 
 ## Ähnliche Projekte
 

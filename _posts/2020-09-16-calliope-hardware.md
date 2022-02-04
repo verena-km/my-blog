@@ -34,8 +34,10 @@ C16 und C17
 Nach Deaktivierung der LED sind zusätzlich nutzbar:
 C4 - C12
 
-Von folgende Pins können statt digitalen Werten auch analoge Werte gelesen werden:
+Von folgenden Pins können statt digitalen Werten auch analoge Werte gelesen werden:
 P1, P2, C4, C5, C6, C16 und C17
+
+C18 und C19 sind für den Anschluss von Komponenten über I2C gedacht.
 
 Um die 6 Motorpins und die darunterliegenden 26 weiteren Pins mit Jumperkabeln zu nutzen ist es hilfreich, an die "Löcher" eine Pinleiste anzulöten. Folgendes Bild zeigt einen Calliope ohne und einen mit angelöteter Pinleiste.
 

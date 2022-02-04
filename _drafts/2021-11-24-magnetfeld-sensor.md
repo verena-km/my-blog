@@ -82,7 +82,7 @@ Folgende Register können gelesen bzw. geschrieben werden.
 
 Mit dem Configuration Register B können die Werte skaliert werden.
 
-Das Mode-Register legt den Mess-Modus des Geräts fest. Es gibt einen Contiuous-Measurement-Modus, bei dem dauerhaft gemessen und die Ergebnisse in die Register geschrieben werden. Beim Single-Measurement-Modus wird immer nur eine Messung durchgeführt.
+Das Mode-Register legt den Mess-Modus des Geräts fest. Es gibt einen Continuous-Measurement-Modus, bei dem dauerhaft gemessen und die Ergebnisse in die Register geschrieben werden. Beim Single-Measurement-Modus wird immer nur eine Messung durchgeführt.
 
 Das Status-Register enthält Statusanzeigen für das Gerät.
 
@@ -117,7 +117,7 @@ sieht man, dass der Sensor an Adresse `1e` angeschlossen ist
 
 ### Beispiele und Bibliotheken
 
-Für den Rasperry Pi sind im Intenet mehrere Beispiele und Bibliotheken zu finden. Einige basieren auf `smbus`, andere auf anderen Biblotheken. Unterschiede liegen zudem darin, welche Funktionen des Sensors (z.B. Skalierung) umgesetzt sind und ob Werte wie z.B. die Kompassausrichtung berechnet werden.
+Für den Rasperry Pi sind im Intenet mehrere Beispiele und Bibliotheken zu finden. Einige basieren auf `smbus`, andere auf anderen Bibliotheken. Unterschiede liegen zudem darin, welche Funktionen des Sensors (z.B. Skalierung) umgesetzt sind und ob Werte wie z.B. die Kompassausrichtung berechnet werden.
 
 Hier einige Bibliotheken die auf `smbus` basieren.
 
@@ -139,7 +139,7 @@ Folgendes Projekt enthält auch Code zum Kalibrieren des Kompasses, allerdings i
 
 ### Eigene Umsetzung
 
-Auf Basis der oben genannten Beispiele und Projekte habe ich eine eigene Klase für den HMC588L erstellt.
+Auf Basis der oben genannten Beispiele und Projekte habe ich eine eigene Klasse für den HMC588L erstellt.
 
 ```python
 # -*- coding: utf-8 -*-
@@ -429,6 +429,8 @@ with special calibration
 """
 
 import smbus
+import os
+from pathlib import Path
 from time import sleep
 import math
 import logging
@@ -497,6 +499,7 @@ class HMC588L(object):
         self.bus = smbus.SMBus(i2c_bus)
         self.range = range
         self.seg_list = None
+        self.calibration_data_file =os.path.expanduser("~/.robbi_conf/mfeld_calibration.json")
 
         #write to Configuration Register A
         reg_a_value = (output_data_rate | samples_averaged)
@@ -513,9 +516,9 @@ class HMC588L(object):
 
         # read calibration list from file
         try:
-            f = open('data.json')
+            f = open(self.calibration_data_file)
             self.seg_list = json.loads(f.read())
-            print(self.seg_list)
+            #print(self.seg_list)
             f.close()
         except FileNotFoundError:
             print('Keine Kalibrierungsdaten gefunden.')
@@ -580,7 +583,7 @@ class HMC588L(object):
                     return (value - segment['start_value']) / segment['divisor'] + segment["target_value"]
 
     def calibrate_positions(self):
-        """Start interactive callibration dialog and save data in file """       
+        """Start interactive calibration dialog and save data in file """       
         position_count = int(input("Anzahl der Positinen: "))
         seg_size = 360 / position_count
         mod_list=[]
@@ -617,12 +620,13 @@ class HMC588L(object):
             divisor = (end - start) / seg_size
             element["divisor"] = divisor
 
-        print(sorted_seg_list)
+        #print(sorted_seg_list)
         return(sorted_seg_list)
 
     def safe_calibration(self):
         """Save conversion list to file"""
-        with open('data.json', 'w', encoding='utf-8') as f:
+        os.makedirs(os.path.dirname(self.calibration_data_file), exist_ok=True)
+        with open(self.calibration_data_file, 'w', encoding='utf-8') as f:
             json.dump(self.seg_list, f, ensure_ascii=False, indent=4)
 
     def has_calibration(self):
