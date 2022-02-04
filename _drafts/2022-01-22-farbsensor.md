@@ -7,7 +7,7 @@ tags: Farbsensor I2C Raspberry
 
 Zur Erkennung von Farben kann man einen Farbsensor verwenden, beispielsweise den "Debo Sens Color" mit dem TCS34725-Chip.
 
-((Foto Sensor allein))
+![Foto Farbsensor](/images/foto_farbsensor.jpg)
 
 Der Sensor enthält ein Fotodioden-Array und ermittelt Werte für Rot, Grün, Blau und Ungefiltert (clear). Die Werte werden vom Sensor als 16-Bit-Werte bereitgestellt. Auf den Sensor kann über I2C zugegriffen werden. Er hat eine integrierte LED zur Beleuchtung.
 
@@ -122,6 +122,8 @@ Durch die Veränderung von "Gain" und "Integration-Time" kann man die Helligkeit
 Auch bei angepassten Werten von "Gain" und Integration Time" zeigt sich in der Praxis, dass die gemessenen RGB-Werte bei dunklen Farben dunkler und bei hellen Farben heller sind als die tatsächlichen Farben. Damit hat man bei der Ausgabe am Bildschirm Abweichungen gegenüber der tatsächlichen Farbe. 
 
 Für meine Test habe ich farbige Papierstücke genutzt und diese jeweils 2 mm oberhalb des Sensors platziert.
+
+![Foto Farbsensor Test](/images/foto_farbsensor_messung.jpg)
 
 ## Beispiel 1: Erkennung bestimmter vorher festgelegter Farbwerte
 
@@ -238,7 +240,9 @@ while True:
     sleep(2)
 ```
 
-(screenshot)
+Die Ausgabe sieht dann wie folgt aus:
+
+![Screenshot Farbsensor](/images/screenshot_farbsensor.png)
 
 
 
