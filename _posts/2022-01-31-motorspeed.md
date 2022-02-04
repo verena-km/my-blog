@@ -1,13 +1,16 @@
 ---
 layout: post
-title:  "Umdrehungen zählen"
-date:   2021-08-16
+title:  "Umdrehungen zählen mit dem Speedsensor"
+date:   2022-01-31
 tags: Speedsensor Calliope Raspberry 
 ---
 
+* TOC
+{:toc}
+
 Beim Einsatz vom Gleichstrommotoren hängt die Geschwindigkeit von der aktuellen Spannung der Batterien bzw. Akkus ab. Daher ist es schwierig, festgelegte Distanzen (z.B. 50 cm vorwärts) zu fahren. Zudem drehen sich selbst baugleiche Motoren nicht immer mit der gleichen Geschwindigkeit.
 
-Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln, beispielsweise der "Speedsensor LM393 mit Lochscheibe". Die mitgelieferte Loschscheibe passt jedoch nicht auf die Lego-Achse.
+Was hilft, sind Sensoren, die die Anzahl der Umdrehungen ermitteln, beispielsweise der "Speedsensor LM393 mit Lochscheibe". Die mitgelieferte Loschscheibe passt jedoch nicht auf Lego-Achsen.
 
 ![Bild Sensor mit Lochscheibe](/images/foto_speedsensor_scheibe.jpg)
 
