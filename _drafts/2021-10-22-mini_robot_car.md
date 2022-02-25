@@ -2,7 +2,7 @@
 layout: post
 title:  "Calliope-Mini-Robot-Car mit Fernsteuerung"
 date:   2021-10-22 
-tags: Calliope Servomotor Geekservo Fernsteuerung 
+tags: Calliope Servomotor Geekservo Fernsteuerung Stromversorgung
 ---
 
 * TOC

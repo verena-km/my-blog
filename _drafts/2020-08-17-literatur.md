@@ -47,6 +47,11 @@ https://www.mitp.de/IT-WEB/LEGO-und-Elektronik.html
 + Schöner Python-Code
 - Motor nicht an Lego-Achse
 
+## LEGO®-Roboter bauen, steuern und programmieren mit Raspberry Pi und Python / Thomas Kaffka
+
+
+
+
 ## Roboter-Autos mit dem Raspberry Pi: Planen, bauen, programmieren von Ingmar Stapel
 
 Im Buch werden Fahrzeuge mit dem Raspi gebaut, verwendet werden u.a.:
@@ -131,8 +136,16 @@ Nach dem Einstieg mit einem Bürsten-Käfer, werden der Arduino und die Programm
 
 ## Motorsteuerung mit Arduino und Raspberry Pi von Dogan Ibrahim
 
-unübersicht
+unübersichtlich
 
+## Projekte mit Arduino und ESP / Danny Schreiter
+
+mehrere Einzelprojekte
+z.B. Lampen mit Neopixel
+Fahrzeug mit Gleichgewichtsensor
+Steuerung mit Arduino
+
+ggf später nochmal ausleihen
 
 
 ##  FRANZIS LEGO® für echte Kerle: LEGO®-Steine mit Elektronik zum Leben erwecken. von E.F. Engelhardt

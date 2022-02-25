@@ -2,7 +2,7 @@
 layout: post
 title:  "Abstandsmessung mit dem Ultraschallsensor"
 date:   2021-10-25
-tags: Ultraschallsensor Raspberry
+tags: Sensor Raspberry
 ---
 
 * TOC

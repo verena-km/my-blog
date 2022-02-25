@@ -2,7 +2,7 @@
 layout: post
 title:  "Magnetfeldmesser / Kompassmodul"
 date:   2022-02-04 
-tags: Magnetfeldsensor I2C Raspberry
+tags: Sensor I2C Raspberry
 ---
 
 * TOC

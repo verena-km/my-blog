@@ -5,6 +5,8 @@ date:   2021-09-16
 tags: Speedsensor Robot Raspberry Beispielfahrzeug
 ---
 
+* TOC
+{:toc}
 
 Dieses Fahrzeug baut auf dem [Raspi-Fahrzeug mit zwei Antriebsmotoren]({% post_url 2021-09-21-raspi-car-gpiozero%}) auf.
 
@@ -54,7 +56,7 @@ Wir definieren dafür zunächst eine Klasse `SpeedSensMotor` die für Motoren mi
 
 ### Klasse SpeedSensMotor für Motoren mit Speedsensor
 
-Die Klasse SpeedSensMotor wird von der [gpiozero-Klasse Moter](https://gpiozero.readthedocs.io/en/stable/api_output.html#motor) abgeleitet und verfügt damit auch über deren Methoden.
+Die Klasse SpeedSensMotor wird von der [gpiozero-Klasse Motor](https://gpiozero.readthedocs.io/en/stable/api_output.html#motor) abgeleitet und verfügt damit auch über deren Methoden.
 
 Bei der Erzeugung von Objekten der Klasse SpeedSensMotor benötigt man neben den GPIO-Pin-Nummern über die der L298 angeschlossen ist (in1_nr, in2_nr) noch folgende weitere Parameter:
 
@@ -396,3 +398,70 @@ for i in range(4):
 ```
 
 Der Grundaufbau des Fahrzeugs und die erweiterten Klassen können nun als Basis für weitere Projekte mit autonomen oder ferngesteuerten Robotern verwendet werden.
+
+## Probleme und Optimierungen
+
+### Unterschiedliche Geschwindigkeit beider Motoren ausgleichen
+
+Motoren drehen sich meist unterschiedlich schnell. Dies führt bei der obigen Methode für Vorwärts- bzw. Rückwärtfahrt dazu, dass der Counter des einen Motors schneller fertiggezählt hat, als der des anderen Motors. Damit fährt das Fahrzeug erst leicht schief (weil ein Motor schneller dreht). Der andere Motor läuft dafür nach dem der schnellere gestoppt hat noch weiter - was zu einer korrigierenden Drehbewegung am Schluss führt.
+
+Um dies zu vermeiden kann man die Methoden für Vorwärts- und Rückwärtsfahrt so anpassen, dass diese wenn die Counter der beiden Motoren zuweit auseinander laufen, die Geschwindigkeit des schnelleren Motors korrigieren.
+
+Nachfolgend sieht man dies am Beispiel der Vorwärtsfahrt. 
+
+```python
+def drive_forward(self, distance, speed = 1):
+        """
+        Drive the robot forward for a specific distance.
+
+            :param float distance:
+                The distance in cm.
+
+            :param speed
+                The speed at witch the motors should turn. Can be any value between
+                0 (stopped) and the default 1 (maximum speed).
+        """
+        print("drive_forward")
+        revolutions = distance / self.wheel_cirumference
+        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
+        print("counts", counts_left)
+        counts_right = revolutions * self.right_motor.holes * 2 / self.right_motor.gear_ratio
+
+        # Reduce counts for braking
+        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
+            counts_left = counts_left-1
+        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
+            counts_right = counts_right-1
+        print("reduced_counts", counts_left)                        
+
+        self.left_motor.reset_counter()
+        self.right_motor.reset_counter()
+        self.left_motor.forward(speed)
+        self.right_motor.forward(speed)
+        while self.left_motor.is_active or self.right_motor.is_active:
+            sleep(.01)
+            # adjust speed if one motor is faster
+            if self.left_motor.counter - self.right_motor.counter > self.adjustment_difference:
+                print("links zu schnell")
+                self.left_motor.forward(speed*self.adjustment_slowdown)
+                self.right_motor.forward(speed)                
+            if self.right_motor.counter - self.left_motor.counter > self.adjustment_difference:
+                print("rechts zu schnell")
+                self.right_motor.forward(speed*self.adjustment_slowdown)
+                self.left_motor.forward(speed)
+             
+            if self.left_motor.counter >= counts_left:               
+                self.left_motor.stop()
+                print("left stopped")
+            if self.right_motor.counter >= counts_right:
+                self.right_motor.stop()
+                print("right stopped")
+        #print("Stopped")
+```
+Der Konstruktor der Klasse Fahrzeug bekommt dafür zwei zusätzliche optionale Parameter, die das Verhalten steuern:
+Der Parameter `adjustment_difference` legt fest, ab welchem Unterschied zwischen beiden Countern der eine Motor langsamer werden soll. Der Parameter `adjustment_slowdown` bestimmt dann mit welchem Faktor der gewählten Geschwindigkeit der schnellere Motor verlangsamt werden soll.
+
+Als praktikabel hat sich ein Unterschied in den Countern von 3 und ein Slowdown auf 90% erwiesen
+
+### Basisklasse Robot verwenden
+

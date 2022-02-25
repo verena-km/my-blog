@@ -2,7 +2,7 @@
 layout: post
 title:  "Umdrehungen zählen mit dem Speedsensor"
 date:   2022-01-31
-tags: Speedsensor Calliope Raspberry 
+tags: Sensor Calliope Raspberry 
 ---
 
 * TOC
