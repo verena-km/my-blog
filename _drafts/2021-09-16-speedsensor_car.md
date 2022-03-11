@@ -58,11 +58,12 @@ Wir definieren dafür zunächst eine Klasse `SpeedSensMotor` die für Motoren mi
 
 Die Klasse SpeedSensMotor wird von der [gpiozero-Klasse Motor](https://gpiozero.readthedocs.io/en/stable/api_output.html#motor) abgeleitet und verfügt damit auch über deren Methoden.
 
-Bei der Erzeugung von Objekten der Klasse SpeedSensMotor benötigt man neben den GPIO-Pin-Nummern über die der L298 angeschlossen ist (in1_nr, in2_nr) noch folgende weitere Parameter:
+Bei der Erzeugung von Objekten der Klasse `SpeedSensMotor` benötigt man neben den GPIO-Pin-Nummern über die der L298 angeschlossen ist (`in1_nr`, `in2_nr`) noch folgende weitere Parameter:
 
 * die Pinnummer des Speed-Sensors (speedsens_nr)
-* die Anzahl der Löcher der Lochscheibe
-* ggf. das Über- bez. Untersetzungsverhältnis beim Einsatz von Zahnrädern
+* die Anzahl der Löcher der Lochscheibe (holes)
+* ggf. das Über- bez. Untersetzungsverhältnis beim Einsatz von Zahnrädern (gear_ratio)
+* ggf. die Geschwindigkeit, ab der der Bremsweg einberechnet werden soll (speed).
 
 ```python
 from gpiozero import DigitalInputDevice
@@ -72,9 +73,9 @@ class SpeedSensMotor(Motor):
     """
     Extends :class: `Motor` to use a motor with a simple speedsensor
 
-    Attach the punched disk to the motor axle so it can rotate in the light
-    barrier. Connect power 3.3V and ground of the speedsensor to the Pi and 
-    connect D0 to a free GPIO pin.
+    Attach the punched disk to the motor axle so it can rotate in the light barrier.
+    Connect power 3.3V and ground of the speedsensor to the Pi and connect D0 to a free 
+    GPIO pin.
 
     :param in1_nr:
         The first GPIO pin the motor driver is connected to.
@@ -90,86 +91,127 @@ class SpeedSensMotor(Motor):
 
     :param gear_ratio:
         If gears are used this is the gear ratio
-        gear_ratio > 1 - driven wheel faster
-        gear_ratio < 1 - driven wheel slower
+        gear_ratio < 1: driven wheel faster
+        gear_ratio > 1: driven wheel slower
+
+    :break_speed_threshold:
+        if speed is faster then break_speed_threshold
+        stop earlier for breaking distance
 
     """
-    def __init__(self, in1_nr, in2_nr, speedsens_nr, holes, gear_ratio=1):
-        super(SpeedSensMotor, self).__init__(in1_nr, in2_nr)
+    def __init__(self, in1_nr, in2_nr, speedsens_nr, holes, gear_ratio=1, brake_speed_threshold=.7):
+        super().__init__(in1_nr, in2_nr)
         self.speedsensor_nr = speedsens_nr
         self.speedsensor = DigitalInputDevice(self.speedsensor_nr)
+        # Callback functions for speed sensor state changes 
         self.speedsensor.when_activated = self.increment_counter
         self.speedsensor.when_deactivated = self.increment_counter
         self.reset_counter()
         self.holes = holes
         self.gear_ratio = gear_ratio
-        # ab welcher Geschwindigkeit muss Bremsweg mit einberechnet werden
-        self.brake_speed_threshold = .7
+        self.brake_speed_threshold = brake_speed_threshold
+
+    def get_counts(self, revolutions, speed = None):
+        """
+            Returns the calculated counts for the punched disk from revolutions.
+            If speed > brake_speed_threshold the calculated counts are reduced by one
+
+            :param revolutions:
+                the number of revolutions to convert
+            :param speed:
+                the motor speed
+        """
+        counts = revolutions * self.holes * 2 * self.gear_ratio
+        if speed:
+            if speed >= self.brake_speed_threshold and counts > 2:
+                counts = counts-1
+        return counts
 
     def reset_counter(self):
+        """
+            Reset the counter
+        """
         self.counter = 0
 
     def increment_counter(self):
+        """
+            Increment the counter by 1
+        """
         self.counter = self.counter + 1
+        #print(self.speedsensor_nr, self.counter)
 
-    def turn_forward(self, revolutions, speed = 1):
+    def forward(self, speed=1, revolutions=None, counts=None):
         """
-            Turn the motor the given number of revolutions forward"
-            :param float revolutions:
-                The number of revolutions to turn
-            :param float speed:
-                The speed at witch the motor should turn. Can be
-                any value between 0 (stopped) and the default 1 
-                (maximum speed)
-        """
-        counts = revolutions * self.holes * 2 / self.gear_ratio
-        # Reduce counts for braking
-        if speed >= self.brake_speed_threshold and counts > 2:
-            counts = counts-1
-        self.reset_counter()
-        self.forward(speed)
-        while self.counter < counts:
-            pass
-        self.stop()
-        self.reset_counter()
+            Turn the motor forward
 
-    def turn_backward(self, revolutions, speed = 1):
-        """
-            Turn the motor the given number of revolutions forward"
-            :param float revolutions:
-                The number of revolutions to turn
             :param float speed:
-                The speed at witch the motor should turn. Can be any
-                value between 0 (stopped) and the default 1 (maximum 
-                speed)
+                The speed at which the motor should turn. Can be any value between
+                0 (stopped) and the default 1 (maximum speed)
+            :param float revolutions:
+                The number of revolutions to turn - including gear ratio. This parameter can only be specified as a
+                keyword parameter, and is mutually exclusive with *counts*
+            :param int counts:
+                The number of counts on the to turn.  This parameter can only be specified as a
+                keyword parameter, and is mutually exclusive with *revolutions*
+        """        
+        if revolutions and counts:
+            raise ValueError("Revolutions and counts can't be used at the same time.")
+
+        if revolutions == None and counts == None:
+            super().forward(speed)
+
+        else:
+            if revolutions:
+                counts = self.get_counts(revolutions,speed)
+            self.reset_counter()
+            self.forward(speed)
+            while self.counter < counts:
+                pass
+            self.stop()
+            self.reset_counter()
+     
+    def backward(self, speed=1, revolutions=None, counts=None):
         """
-        counts = revolutions * self.holes * 2 / self.gear_ratio
-        if speed >= self.brake_speed_threshold and counts > 2:
-            counts = counts-1
-        self.reset_counter()
-        self.backward(speed)
-        while self.counter < counts:
-            pass
-        self.stop()
-        self.reset_counter()
+            Turn the motor backward
+
+            :param float speed:
+                The speed at which the motor should turn. Can be any value between
+                0 (stopped) and the default 1 (maximum speed)
+            :param float revolutions:
+                The number of revolutions to turn - including gear ratio. This parameter can only be specified as a
+                keyword parameter, and is mutually exclusive with *counts*
+            :param int counts:
+                The number of counts on the to turn.  This parameter can only be specified as a
+                keyword parameter, and is mutually exclusive with *revolutions*
+        """        
+        if revolutions and counts:
+            raise ValueError("revolutions and counts can't be used at the same time")
+
+        if revolutions == None and counts == None:
+            super().backward(speed)
+
+        else:
+            if revolutions:
+                counts = self.get_counts(revolutions,speed)
+            self.reset_counter()
+            self.backward(speed)
+            while self.counter < counts:
+                pass
+            self.stop()
+            self.reset_counter()
 
 ```        
 
-Im Konstruktor wird dann der Konstruktor der Superklasse (also der gpiozero-Motor-Klasse) aufgerufen. Daneben wird ein Objekt der gpiozero-Klasse [DigitalInputDevice](https://gpiozero.readthedocs.io/en/stable/api_input.html#digitalinputdevice) für den Speedsensor erzeugt und die Methode festgelegt, die bei einem Wechsel von 0 nach 1, bzw. bei einem Wechsel von 1 nach 0 ausgeführt wird. In beiden Fällen soll der Zähler erhöht werden, also die Methoden `increment_counter` aufrufen werden.
+Im Konstruktor wird dann der Konstruktor der Superklasse (also der gpiozero-Motor-Klasse) aufgerufen. Daneben wird ein Objekt der gpiozero-Klasse [DigitalInputDevice](https://gpiozero.readthedocs.io/en/stable/api_input.html#digitalinputdevice) für den Speedsensor erzeugt und die Methode festgelegt, die bei einem Wechsel von 0 nach 1, bzw. bei einem Wechsel von 1 nach 0 ausgeführt wird. In beiden Fällen soll der Zähler erhöht werden, also die Methoden `increment_counter` aufrufen werden. Mit der Methode `reset_counter` kann der Zähler zurückgesetzt werden.
 
-Mit der Methode `reset_counter` kann der Zähler zurückgesetzt werden.
+Die von der Klasse `Motor` geerbten Methoden `forward` und `backward` zum Vorwärts- bzw. Rückwärtsdrehen werden überschrieben und erhalten zwei Schlüsselwortparameter `revolutions` und `counts`. Ruft man die Methoden mit dem Parameter `counts` auf, dreht der Motor um die entsprechende Anzahl Positionen der Lochscheibe. Ruft man die Methoden mit dem Parameter `revolutions` auf, so dreht sich der Motor um die entsprechende Anzahl der Umdrehungen. Wird keiner der Parameter angegeben, wird die entsprechende Methode der Klasse `Motor` aufgerufen - damit dreht sich der Motor dauerhaft.
 
-Neben den durch die Vererbung von der Klasse Motor bereits vorhandenen Methoden `forward` und `backward` zum dauerhaften Vorwärts- bzw. Rückwärtsdrehen, definieren wir zwei zusätzliche Methoden `turn_forward` und `turn_backward` um den Motor um eine bestimmte Anzahl von Umdrehungen (revolutions) vorwärts bzw. rückwärts zu drehen. Die Anzahl der Umdrehungen wird als Parameter mitgegeben, auch die Geschwindigkeit (zwischen 0 und 1) kann angegeben werden. 
+Gibt man die Umdrehungen an, wird zunächst mit `get_counts` die Anzahl der zu zählenden Wechsel von 0 nach eins und umgekehrt berechnet. Dabei werden ggf. das Über- bez. Untersetzungsverhältnis bei der Verwendung von Zahnrädern sowie der Bremsweg berücksichtigt. Gibt man die direkt die Positionen an, ist keine Berechnung erforderlich. Nach Rücksetzen des Zählers wird der Motor über den Aufruf der Methode `forward` gestartet und solange gewartet, bis der Zähler die erforderliche Anzahl von Wechseln erreicht hat. Dann wird der Motor gestoppt.
 
-Beim Aufruf der Methode `turn_forward` wird dann aus der Anzahl der Umdrehungen  mit der Anzahl der Löcher der Lochscheibe und dem Übersetzungsverhältnis die Anzahl der benötigten Wechsel von 0 nach 1 bzw. 1 nach 0 berechnet. Bei höhren Geschwindigkeiten wird für den Bremsweg noch eins abgezogen.
-
-Nach Rücksetzen des Zählers wird der Motor über den Aufruf der Methode `forward` gestartet und solange gewartet, bis der Zähler die erforderliche Anzahl von Wechseln erreicht hat. Dann wird der Motor gestoppt.
-
-Das Rückwärtsdrehen funktioniert genauso.
 
 ### Klasse SpeedSensRobot für Zwei-Motoren-Roboter mit Speedsensoren
 
-Diese Klasse leiten wir der Einfachheit halber nicht von der gpiozero-Klasse `Robot` ab, sondern definieren diese unabhängig davon.
+Diese Klasse leiten wir von der gpiozero-Klasse `Robot` ab. Grundlage ist allerdings die neueste Version von `Robot` auf Github, da deren Konstruktur zwei Motor-Objekte (und nicht mehr ein Zahlentupel) als Parameter verwendet. 
 
 Bei der Erzeugung von Objekten der Klasse SpeedSensRobot benötigt man folgende Parameter:
 
@@ -177,16 +219,17 @@ Bei der Erzeugung von Objekten der Klasse SpeedSensRobot benötigt man folgende 
 * ein Objekt der Klasse SpeedSensMotor als rechten Motor
 * die Spurweite (track_width)
 * den Radumfang (wheel_circumference)
+* ggf. Parameter zum Angleichen unterschiedlicher Motor-Geschwindigkeiten
 
 ```python
-class SpeedSensRobot():
+class SpeedSensRobot(NewRobot):
     """
     Dual-motor robot with speed-sensor at each motor
 
-    :param left_motor
+    :param left
         A :class: `SpeedSensMotor` for the left wheel of the robot
 
-    :param right_motor
+    :param right
         A :class: `SpeedSensMotor` for the right wheel of the robot
 
     :param float track_width
@@ -194,162 +237,246 @@ class SpeedSensRobot():
 
     :param float wheel_circumference
         The wheel_circumference in cm
+
+    :speed_adjustment_slowdown
+        slowdown factor to adjust diffrent motor speeds
+
+    :adjustment_difference
+        difference between left and right counter
+        from which speed is adjusted
     """
 
-    def __init__(self, left_motor, right_motor, track_width, wheel_circumference):
-        self.left_motor = left_motor
-        self.right_motor = right_motor
+    def __init__(self, left, right, track_width, wheel_circumference, speed_adjustment_slowdown =.9, adjustment_difference= 2, **kwargs ):
+        super().__init__(left, right, **kwargs)
         self.track_width = track_width
         self.wheel_cirumference = wheel_circumference
+        self.adjustment_slowdown = speed_adjustment_slowdown
+        self.adjustment_difference = adjustment_difference
 
-    def drive_forward(self, distance, speed = 1):
+    def reset_counters(self):
         """
-        Drive the robot forward for a specific distance.
-
-            :param float distance:
-                The distance in cm.
-
-            :param speed
-                The speed at witch the motors should turn. Can be any value 
-                between 0 (stopped) and the default 1 (maximum speed).
+            Reset the counters of both motors
         """
-        revolutions = distance / self.wheel_cirumference
-        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
-        counts_right = revolutions * self.right_motor.holes * 2 / self.right_motor.gear_ratio
-
-        # Reduce counts for braking
-        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
-            counts_left = counts_left-1
-        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
-            counts_right = counts_right-1                    
-
         self.left_motor.reset_counter()
         self.right_motor.reset_counter()
-        self.left_motor.forward(speed)
-        self.right_motor.forward(speed)
-        while self.left_motor.is_active or self.right_motor.is_active:
-            if self.left_motor.counter >= counts_left:               
-                self.left_motor.stop()
-            if self.right_motor.counter >= counts_right:
-                self.right_motor.stop()
 
-    def drive_backward(self, distance, speed = 1):
+    @property
+    def counters(self):
         """
-        Drive the robot backward for a specific distance.
-
-            :param float distance:
-                The distance in cm.
-
-            :param speed
-                The speed at witch the motors should turn. Can be any value
-                between 0 (stopped) and the default 1 (maximum speed).
-        """      
-        revolutions = distance / self.wheel_cirumference
-        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
-        counts_right = revolutions * self.right_motor.holes * 2 / self.left_motor.gear_ratio
-
-        # Reduce counts for braking
-        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
-            counts_left = counts_left-1
-        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
-            counts_right = counts_right-1           
-
-        self.left_motor.reset_counter()
-        self.right_motor.reset_counter()
-        self.left_motor.backward(speed)
-        self.right_motor.backward(speed)
-        while self.left_motor.is_active or self.right_motor.is_active:
-            if self.left_motor.counter >= counts_left:
-                self.left_motor.stop()
-            if self.right_motor.counter >= counts_right:
-                self.right_motor.stop()
-
-    def turn_left(self, angle=90, speed = 1):
+            Return the counters of both motors as tuple
         """
-        Turn the robot left for the given angle.
+        return ((self.left_motor.counter,self.right_motor.counter))
 
-            :param float angle:
-                The angle in degree.
-
-            :param speed
-                The speed at witch the motors should turn. Can be any value
-                between 0 (stopped) and the default 1 (maximum speed).
+    def forward(self, speed = 1, distance = None, **kwargs): 
         """
-        distance = self.track_width * 3.14 * angle/360
-        revolutions =  distance / self.wheel_cirumference
-        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
-        counts_right = revolutions * self.right_motor.holes * 2 / self.left_motor.gear_ratio
-
-        # Reduce counts for braking
-        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
-            counts_left = counts_left-1
-        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
-            counts_right = counts_right-1
-
-        
-        self.left_motor.reset_counter()
-        self.right_motor.reset_counter()
-        self.left_motor.backward(speed)
-        self.right_motor.forward(speed)
-        while self.left_motor.is_active or self.right_motor.is_active:
-            if self.left_motor.counter >= counts_left:
-                self.left_motor.stop()
-            if self.right_motor.counter >= counts_right:
-                self.right_motor.stop()
-
-    def turn_right(self, angle=90, speed = 1):
+        Drive the robot forward by running both motors forward.
+        :param float speed:
+            Speed at which to drive the motors, as a value between 0 (stopped)
+            and 1 (full speed). The default is 1.
+        :param float curve_left:
+            The amount to curve left while moving forwards, by driving the
+            left motor at a slower speed. Maximum *curve_left* is 1, the
+            default is 0 (no curve). This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_right*.
+        :param float curve_right:
+            The amount to curve right while moving forwards, by driving the
+            right motor at a slower speed. Maximum *curve_right* is 1, the
+            default is 0 (no curve). This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_left*.
+        :param float distance:
+            Distance to drive in cm. This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_left* and 
+            *curve_right*
         """
-        Turn the robot right for the given angle.
+        if distance == None:
+            # normal forward behavior from Robot class
+            super().forward(speed, **kwargs)
+        else:
+            if "curve_left" in kwargs or "curve_right" in kwargs:
+                raise ValueError("If distance is specicfied, curve is not possible.")
+            else:
+                revolutions = distance / self.wheel_cirumference
+                counts_left = self.left_motor.get_counts(revolutions,speed)
+                counts_right = self.right_motor.get_counts(revolutions,speed)
+                   
+                self.reset_counters()
+                self.left_motor.forward(speed)
+                self.right_motor.forward(speed)
+                while self.left_motor.is_active or self.right_motor.is_active:
+                    sleep(.01)
+                    # adjust speed if one motor is faster
+                    if self.left_motor.counter - self.right_motor.counter > self.adjustment_difference:
+                        print("left too fast")
+                        self.left_motor.forward(speed*self.adjustment_slowdown)
+                        self.right_motor.forward(speed)                
+                    if self.right_motor.counter - self.left_motor.counter > self.adjustment_difference:
+                        print("right too fast")
+                        self.right_motor.forward(speed*self.adjustment_slowdown)
+                        self.left_motor.forward(speed)
+                    # stop if counts are reached
+                    if self.left_motor.counter >= counts_left:               
+                        self.left_motor.stop()
+                        print("left stopped")
+                    if self.right_motor.counter >= counts_right:
+                        self.right_motor.stop()
+                        print("right stopped")
 
-            :param float angle:
-                The angle in degree.
-
-            :param speed
-                The speed at witch the motors should turn. Can be any value
-                between 0 (stopped) and the default 1 (maximum speed).
+    def backward(self, speed=1, distance = None, **kwargs):        
         """
-        distance = self.track_width * 3.14 * angle/360        
-        revolutions =  distance / self.wheel_cirumference
-        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
-        counts_right = revolutions * self.right_motor.holes * 2 / self.left_motor.gear_ratio
+        Drive the robot backward by running both motors backward.
+        :param float speed:
+            Speed at which to drive the motors, as a value between 0 (stopped)
+            and 1 (full speed). The default is 1.
+        :param float curve_left:
+            The amount to curve left while moving forwards, by driving the
+            left motor at a slower speed. Maximum *curve_left* is 1, the
+            default is 0 (no curve). This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_right*.
+        :param float curve_right:
+            The amount to curve right while moving forwards, by driving the
+            right motor at a slower speed. Maximum *curve_right* is 1, the
+            default is 0 (no curve). This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_left*.
+        :param float distance:
+            Distance to drive in cm. This parameter can only be specified as a
+            keyword parameter, and is mutually exclusive with *curve_left* and 
+            *curve_right*
+        """
+        if distance == None:
+            # normal backward behavior from Robot class
+            super().backward(speed, **kwargs)
+        else:
+            if "curve_left" in kwargs or "curve_right" in kwargs:
+                raise ValueError("If distance is specicfied, curve is not possible.")
+            else:
+                #speed = kwargs.get("speed",1)
+                revolutions = distance / self.wheel_cirumference
+                counts_left = self.left_motor.get_counts(revolutions,speed)
+                counts_right = self.right_motor.get_counts(revolutions,speed)
+                   
+                self.reset_counters()
+                self.left_motor.backward(speed)
+                self.right_motor.backward(speed)
 
-        # Reduce counts for braking
-        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
-            counts_left = counts_left-1
-        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
-            counts_right = counts_right-1
+                while self.left_motor.is_active or self.right_motor.is_active:
+                    sleep(.01)
+                    # adjust speed if one motor is faster
+                    if self.left_motor.counter - self.right_motor.counter > self.adjustment_difference:
+                        print("left too fast")
+                        self.left_motor.backward(speed*self.adjustment_slowdown)
+                        self.right_motor.backward(speed)                
+                    if self.right_motor.counter - self.left_motor.counter > self.adjustment_difference:
+                        print("right too fast")
+                        self.right_motor.backward(speed*self.adjustment_slowdown)
+                        self.left_motor.backward(speed)
 
-        self.left_motor.reset_counter()
-        self.right_motor.reset_counter()
-        self.left_motor.forward(speed)
-        self.right_motor.backward(speed)
-        while self.left_motor.is_active or self.right_motor.is_active:
-            if self.left_motor.counter >= counts_left:
-                self.left_motor.stop()
-            if self.right_motor.counter >= counts_right:
-                self.right_motor.stop()
+                    if self.left_motor.counter >= counts_left:
+                        self.left_motor.stop()
+                        print("left stopped")
+                    if self.right_motor.counter >= counts_right:
+                        self.right_motor.stop()
+                        print("right stopped")                
+
+    def left(self, speed=1, angle=None):
+        """
+        Make the robot turn left by running the right motor forward and left
+        motor backward.
+        :param float speed:
+            Speed at which to drive the motors, as a value between 0 (stopped)
+            and 1 (full speed). The default is 1.
+
+        :param float angle:
+                The angle in degree.            
+        """
+        if angle == None:
+            # normal backward behavior from Robot class
+            super().left(speed)
+        else:
+            if angle <= 0 :
+                raise ValueError("angle must be > 0")
+            else:
+                distance = self.track_width * 3.14 * angle/360
+                revolutions =  distance / self.wheel_cirumference
+                counts_left = self.left_motor.get_counts(revolutions,speed)
+                counts_right = self.right_motor.get_counts(revolutions,speed)
+
+                # TODO: Do we need adjustment?
+                self.reset_counters()
+                self.left_motor.backward(speed)
+                self.right_motor.forward(speed)
+                while self.left_motor.is_active or self.right_motor.is_active:
+                    if self.left_motor.counter >= counts_left:
+                        self.left_motor.stop()
+                        print("left stopped")
+                    if self.right_motor.counter >= counts_right:
+                        self.right_motor.stop()
+                        print("right stopped")
+
+
+    def right(self, speed=1, angle=None):
+        """
+        Make the robot turn left by running the right motor forward and left
+        motor backward.
+        :param float speed:
+            Speed at which to drive the motors, as a value between 0 (stopped)
+            and 1 (full speed). The default is 1.
+
+        :param float angle:
+                The angle in degree.            
+        """
+        if angle == None:
+            # normal backward behavior from Robot class
+            super().right(speed)
+        else:
+            if angle <= 0 :
+                raise ValueError("angle must be > 0")
+            else:
+                distance = self.track_width * 3.14 * angle/360
+                revolutions =  distance / self.wheel_cirumference
+                counts_left = self.left_motor.get_counts(revolutions,speed)
+                counts_right = self.right_motor.get_counts(revolutions,speed)
+              
+                # TODO: Do we need adjustment?
+                self.reset_counters()
+                self.left_motor.forward(speed)
+                self.right_motor.backward(speed)
+                while self.left_motor.is_active or self.right_motor.is_active:
+                    if self.left_motor.counter >= counts_left:
+                        self.left_motor.stop()
+                        print("left stopped")
+                    if self.right_motor.counter >= counts_right:
+                        self.right_motor.stop()
+                        print("right stopped")
 ```
 
 
-Die Klasse hat folgende Methoden:
-* `drive_forward` um eine bestimmte Strecke vorwärts zu fahren
-* `drive _backward` um eine bestimmte Strecke rückwärts zu fahren
-* `turn_left` um um einen bestimmten Winkel nach links zu drehen
-* `turn_right` um um einen bestimmten Winkel nach rechts zu drehen
+Die Klasse überschreibt die folgenden Methoden der Klasse `Robot`:
+* `forward` erhält einen weiteren optionalen Parameter `distance` um eine bestimmte Strecke vorwärts zu fahren
+* `backward` erhält einen weiteren optionalen Parameter `distance` um eine bestimmte Strecke rückwärts zu fahren
+* `left` erhält einen weiteren optionalen Parameter `angle` um um einen bestimmten Winkel nach links zu drehen
+* `right` erhält einen weiteren optionalen Parameter `angle` um um einen bestimmten Winkel nach links zu drehen
 
-Bei allen Methoden wird zunächst berechnet, um wieviele Wechsel (0 nach 1 und 1 nach 0) sich jeder der Motoren drehen muss.
+Falls die Methoden ohne diese Parameter aufgerufen werden, wird die jeweilige Methode der Klasse `Robot` ausgeführt.
 
-Beim Vorwärts- und Rückwärtsfahren werden hierzu zunächst aus der gewünschten Strecke und dem Radumfang die erforderlichen Umdrehungen und daraus dann die Anzahl der Wechsel berechnet. Auch hier wird bei höheren Geschwindigkeiten für den Bremsweg eins abgezogen.
+Sind die Parameter angegeben, wird zunächst berechnet, um wieviele Wechsel (0 nach 1 und 1 nach 0) sich jeder der Motoren drehen muss.
+
+Beim Vorwärts- und Rückwärtsfahren werden hierzu zunächst aus der gewünschten Strecke und dem Radumfang die erforderlichen Umdrehungen und daraus dann die Anzahl der Wechsel berechnet. 
 
 Bei der Drehung dreht sich ein Motor vorwärts und der andere rückwärts. Hier gilt für die zu fahrende Strecke:
 ```
 Strecke = Spurweite * 3,14 * winkel / 360
 ```
-Aus der Strecke kann man dann mit Hilfe des Radumfangs wieder die erforderlichen Umdrehungen und daraus dann die Anzahl der Wechsel berechnen. Auch hier wird bei höheren Geschwindigkeiten für den Bremsweg eins abgezogen.
+Aus der Strecke kann man dann mit Hilfe des Radumfangs wieder die erforderlichen Umdrehungen und daraus dann die Anzahl der Wechsel berechnen.
 
-Nach der Berechnung der Anzahl der Wechsel für jeden Motor wird der Zähler jedes Motors zurückgesetzt und die Motoren dann gestartet. 
+Nach der Berechnung der Anzahl der Wechsel für jeden Motor wird der Zähler jedes Motors zurückgesetzt und die Motoren dann gestartet. Danach wird in eine Schleife für jeden der beiden Motoren geprüft, ob die Anzahl der erforderlichen Wechsel schon erreicht ist und wenn dies der Fall ist, wird der Motor gestoppt. 
 
-Dann wird in eine Schleife für jeden der beiden Motoren geprüft, ob die Anzahl der erforderlichen Wechsel schon erreicht ist und wenn dies der Fall ist, wird der Motor gestoppt.
+Falls einer der Motoren schon mehr Wechsel hat als der andere wird er leicht gebremst, damit die Räder in etwa gleichzeitig zum Stehen kommen. 
+
+Der Konstruktor der Klasse Fahrzeug hat dafür zwei zusätzliche optionale Parameter, die das Verhalten steuern:
+Der Parameter `adjustment_difference` legt fest, ab welchem Unterschied zwischen beiden Countern der eine Motor langsamer werden soll. Der Parameter `adjustment_slowdown` bestimmt dann mit welchem Faktor der gewählten Geschwindigkeit der schnellere Motor verlangsamt werden soll.
+
+Als praktikabel hat sich ein Unterschied in den Countern von 3 und ein Slowdown auf 90% erwiesen
+
 
 
 ### Nutzung der Klassen und Feinabstimmung
@@ -399,69 +526,4 @@ for i in range(4):
 
 Der Grundaufbau des Fahrzeugs und die erweiterten Klassen können nun als Basis für weitere Projekte mit autonomen oder ferngesteuerten Robotern verwendet werden.
 
-## Probleme und Optimierungen
-
-### Unterschiedliche Geschwindigkeit beider Motoren ausgleichen
-
-Motoren drehen sich meist unterschiedlich schnell. Dies führt bei der obigen Methode für Vorwärts- bzw. Rückwärtfahrt dazu, dass der Counter des einen Motors schneller fertiggezählt hat, als der des anderen Motors. Damit fährt das Fahrzeug erst leicht schief (weil ein Motor schneller dreht). Der andere Motor läuft dafür nach dem der schnellere gestoppt hat noch weiter - was zu einer korrigierenden Drehbewegung am Schluss führt.
-
-Um dies zu vermeiden kann man die Methoden für Vorwärts- und Rückwärtsfahrt so anpassen, dass diese wenn die Counter der beiden Motoren zuweit auseinander laufen, die Geschwindigkeit des schnelleren Motors korrigieren.
-
-Nachfolgend sieht man dies am Beispiel der Vorwärtsfahrt. 
-
-```python
-def drive_forward(self, distance, speed = 1):
-        """
-        Drive the robot forward for a specific distance.
-
-            :param float distance:
-                The distance in cm.
-
-            :param speed
-                The speed at witch the motors should turn. Can be any value between
-                0 (stopped) and the default 1 (maximum speed).
-        """
-        print("drive_forward")
-        revolutions = distance / self.wheel_cirumference
-        counts_left = revolutions * self.left_motor.holes * 2 / self.left_motor.gear_ratio
-        print("counts", counts_left)
-        counts_right = revolutions * self.right_motor.holes * 2 / self.right_motor.gear_ratio
-
-        # Reduce counts for braking
-        if speed >= self.left_motor.brake_speed_threshold and counts_left > 2:
-            counts_left = counts_left-1
-        if speed >= self.right_motor.brake_speed_threshold and counts_right > 2:
-            counts_right = counts_right-1
-        print("reduced_counts", counts_left)                        
-
-        self.left_motor.reset_counter()
-        self.right_motor.reset_counter()
-        self.left_motor.forward(speed)
-        self.right_motor.forward(speed)
-        while self.left_motor.is_active or self.right_motor.is_active:
-            sleep(.01)
-            # adjust speed if one motor is faster
-            if self.left_motor.counter - self.right_motor.counter > self.adjustment_difference:
-                print("links zu schnell")
-                self.left_motor.forward(speed*self.adjustment_slowdown)
-                self.right_motor.forward(speed)                
-            if self.right_motor.counter - self.left_motor.counter > self.adjustment_difference:
-                print("rechts zu schnell")
-                self.right_motor.forward(speed*self.adjustment_slowdown)
-                self.left_motor.forward(speed)
-             
-            if self.left_motor.counter >= counts_left:               
-                self.left_motor.stop()
-                print("left stopped")
-            if self.right_motor.counter >= counts_right:
-                self.right_motor.stop()
-                print("right stopped")
-        #print("Stopped")
-```
-Der Konstruktor der Klasse Fahrzeug bekommt dafür zwei zusätzliche optionale Parameter, die das Verhalten steuern:
-Der Parameter `adjustment_difference` legt fest, ab welchem Unterschied zwischen beiden Countern der eine Motor langsamer werden soll. Der Parameter `adjustment_slowdown` bestimmt dann mit welchem Faktor der gewählten Geschwindigkeit der schnellere Motor verlangsamt werden soll.
-
-Als praktikabel hat sich ein Unterschied in den Countern von 3 und ein Slowdown auf 90% erwiesen
-
-### Basisklasse Robot verwenden
 
