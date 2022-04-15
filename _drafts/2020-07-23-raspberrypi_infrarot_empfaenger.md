@@ -152,3 +152,6 @@ https://askubuntu.com/questions/1272907/reading-ir-codes-from-input-events
 https://forum.ubuntuusers.de/topic/infrarot-events-lesen/
 
 https://github.com/peterhinch/micropython_ir
+
+
+https://bobrathbone.com/raspberrypi/documents/Raspberry%20PI%20Radio.pdf

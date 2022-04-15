@@ -174,3 +174,34 @@ https://www.youtube.com/channel/UCCJJNQIhS15ypcHqDfEPNXg
 
 Coole Neopixel-Ideen
 https://www.youtube.com/watch?v=bK06kua8Oyg
+
+
+FM Radio:
+
+Übersicht
+https://www.rockbox.org/wiki/FmTunerHardware
+
+Si7403
+Si740x
+    FM radio module
+    - keine externe Antenne erforderlich
+    https://www.sparkfun.com/datasheets/BreakoutBoards/Si4702-03-C19-1.pdf
+    https://github.com/ryedwards/si4703RaspberryPi
+    8 Euro
+
+
+TEA5767 FM 
+    - mit Anschlussmodul und Antenne
+    - 10 Euro
+    - I2C
+    https://www.sparkfun.com/datasheets/Wireless/General/TEA5767.pdf    
+    Raspberry Pi
+        https://www.youtube.com/watch?v=3qYBimdCeHk
+    hat wohl keine Lautstärkeregelung
+    
+
+RDA5807SP
+    - hat Lautstärkeregelung
+
+Monkeyboard
+- zu teuer

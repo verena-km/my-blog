@@ -71,3 +71,7 @@ print(SpeedSensCompassRobot.mro())
 
 Weitere Infos zur Nutzung der Mehrfachvererbung sind hier zu finden:
 * [https://stackoverflow.com/questions/3277367/how-does-pythons-super-work-with-multiple-inheritance](https://stackoverflow.com/questions/3277367/how-does-pythons-super-work-with-multiple-inheritance)
+
+https://realpython.com/inheritance-composition-python/
+
+composition over inheritance python

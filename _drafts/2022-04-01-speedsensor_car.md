@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Raspi-Fahrzeug mit Speedsensor"
-date:   2021-09-16
+date:   2022-04-01
 tags: Speedsensor Robot Raspberry Beispielfahrzeug
 ---
 
@@ -449,7 +449,6 @@ class SpeedSensRobot(NewRobot):
                         print("right stopped")
 ```
 
-
 Die Klasse überschreibt die folgenden Methoden der Klasse `Robot`:
 * `forward` erhält einen weiteren optionalen Parameter `distance` um eine bestimmte Strecke vorwärts zu fahren
 * `backward` erhält einen weiteren optionalen Parameter `distance` um eine bestimmte Strecke rückwärts zu fahren
@@ -478,7 +477,6 @@ Der Parameter `adjustment_difference` legt fest, ab welchem Unterschied zwischen
 Als praktikabel hat sich ein Unterschied in den Countern von 3 und ein Slowdown auf 90% erwiesen
 
 
-
 ### Nutzung der Klassen und Feinabstimmung
 
 Für das oben beschriebene Fahrzeug kann man ein Objekt der Klasse SpeedSensRobot wie folgt erzeugen:
@@ -496,24 +494,24 @@ motor_rechts = SpeedSensMotor(in1_nr = 12,
                         holes = 6,
                         gear_ratio .6)
 
-robot = SpeedSensRobot(left_motor = motor_links,
-                        right_motor = motor_rechts,
-                        track_width = 11.2,
-                        wheel_cirumference = 15.4)
+robot = SpeedSensRobot(left = motor_links,
+                            right = motor_rechts,
+                            track_width = 10.4,
+                            wheel_circumference = 9.5)
 ```
 
 Beim Aufruf der Methoden zeigen sich beim Nachmessen eventuell Abweichungen, die verschiedene Ursachen (Bodenbeschaffenheit etc.) haben können. 
 
-Für eine Feinabstimmung kann man dass Fahrzeug z.B. 100 cm vorwärts fahren lassen und dann nachzumessen. Durch Veränderung des Radumfangs kann die gefahrene Strecke angepasst werden.
+Für eine Feinabstimmung kann man dass Fahrzeug z.B. 100 cm vorwärts fahren lassen und dann nachzumessen. Durch Veränderung des Radumfangs kann die gefahrene Strecke angepasst werden. Fährt das Fahrzeug zu weit, muss man den Radumfang (wheel_circumference) vergrößern, fährt es nicht weit genug, muss man ihn verkleinern. 
 
 ```python 
-robot.drive_forward(100,1)
+robot.forward(distance = 50)
 ```
 
-Ähnlich kann man beim Drehen, das Fahrzeug um 360 Grad drehen lassen. Durch Veränderung der Spurweite kann dann die Drehung angepasst werden.
+Für die Feinabstimmung der Spurweite kann man das Fahrzeug um 360 Grad drehen lassen. Dreht es zu weit, muss man die Spurweite (track_width)reduzieren, dreht es nicht weit genug, muss man die Spurweite erhöhen.
 
 ```python 
-robot.turn_left(angle=360)
+robot.left(angle=360)
 ```
 
 Sobald man das gemacht hat, kann man den Roboter beispielsweise im Quadrat fahren lassen.
