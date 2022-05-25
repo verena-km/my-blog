@@ -178,7 +178,7 @@ time.sleep(1)
 servo.duty(56)
 ```
 
-In MicroPython kann man ebenfalls Klassen für die Servos definieren, was die spätere Nutzung vereinfacht. Wir orientieren uns dabei an der Klasse AngluarSevero aus der gpiozero-Biblothek für den Raspi (siehe oben): 
+In MicroPython kann man ebenfalls Klassen für die Servos definieren, was die spätere Nutzung vereinfacht. Wir orientieren uns dabei an der Klasse AngluarServo aus der gpiozero-Biblothek für den Raspi (siehe oben): 
 
 ``` python
 from  machine import Pin, PWM
