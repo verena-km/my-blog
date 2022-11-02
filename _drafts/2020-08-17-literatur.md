@@ -80,7 +80,7 @@ www.rheinwerk-verlag.de/4812 - Toy Story
 - Code nicht objektorientiert
 - nicht speziell Lego
 
-## Heimautomation mit Arduino, Raspberry Pi und ESP8266
+## Heimautomation mit Arduino, Raspberry Pi und ESP8266 von Thomas Brühlmann
 
 Im Buch werden Arduino-Boards als Sensor und Aktor und ein Raspberry Pi als Zentraleinheit zur Datenverarbeitung und Darstellung genutzt und zunächst deren grundsätzliche Nutzung erläutert.
 
@@ -149,6 +149,80 @@ ggf später nochmal ausleihen
 
 
 ##  FRANZIS LEGO® für echte Kerle: LEGO®-Steine mit Elektronik zum Leben erwecken. von E.F. Engelhardt
+
+
+
+## Raspberry Pi Pico Schnelleinstieg von Thomas Brühlmann
+
+https://github.com/arduinopraxis/Buch-RPi-Pico 
+
+1. Auflage 2021
+
+Nach Erläuterung zur Hardware und zur Nutzung von MicroPython in der Thonny IDE werden kurz verchiedene elekronische Bauteile vorgestellt. Danach werden erläutert:
+- digitale Ein- und Ausgänge am Pico und deren Ansteuerung (Taster, LED, PWM)
+- Servo mit Poti steuern
+- Transistor und Relais
+- Motor mit Motortreiber DRV8871 bzw. TB6612FNG
+- Analoge Eingänge
+- interner Temperatursesnor
+- Poti mit LED-Amplel
+- Lichtmesser mit Photowiderstand (LDR)
+- NTC-Sensor 10kOHm
+- RGB-LED
+- LC-Display 16x2 (I2C) / Verwendung mit Level-Shifter
+- OLED-Display (I2C)
+- Wetterstation mit Umweltsensor DHT22
+- Datenaustausch mit Arduino über UART mit Level-Shifter
+- I2C: Lichtmesser mit BH1750
+- PIO / State Machine
+
+# IoT@Home von Peter und Stephan Hüwe
+
+Smart Gadgets mit Arduino, Raspberry Pi, ESP8266 und Calliope entwickeln.
+
+Das Buch startet mit einem Grundlagenkapitel zu 
+- Elektrotechnischen Grundlagen
+- Funkstandards
+- Programmiersprachen
+- Security
+
+Danach werden Arduino, Raspberry Pi, ESP8266 und ESP32 sowie der Calliope Mini vorgestellt und die Schnittstellen:
+- SPI
+- I2C
+- UART
+erläutert.
+
+Dann werden elektronische Komponenten beschrieben:
+- LED
+- Neopixel
+- Widerstände
+- Schalter/Buttons
+- A/D-Wandler
+- Temperatur- und Feuchtigkeitssensoren
+- Gleichstrom- Schritt und Servomotoren
+- Kamera, Mikrofon, Lautsprecher & Co.
+
+Danach geht es in die Projekte:
+- Digitale Spartose mit ESP8266 und LCD-Display
+- Mobile Temberaturmessung mit Rasperry Pi, DHT11, und Surfstick, Hologram.io
+- Fitnesstrainer mit Calliope mini
+
+- Word Clock mit Arduiono und LED-Stripes
+- LED-Punktuhr mit Raspberry Pi Zero und unicorn pHAT
+
+- Smartes Türschloss mit Raspberry Pi
+- Smart Mirror mit Raspberry Pi
+- Smarter Adventskalender mit Raspberry Pi
+- Smarter Kühlschrank mit ESP8266
+
+In einem letzten Kapitel geht es um Smart-Home-Plattformen:
+- MQTT
+- Home Assistant
+- FHEM
+- openHAB
+- ioBroker
+
+
 
 ## Wunschzettel
 * The LEGO Technic Idea Book: Simple Machines von Yoshihito Isogawa - ISBN 1593272774
