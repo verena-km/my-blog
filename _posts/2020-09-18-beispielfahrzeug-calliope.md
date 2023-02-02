@@ -5,7 +5,7 @@ date:   2020-09-18
 tags: Calliope Beispielfahrzeug
 ---
 
-![Beispielfahrzeug zwei Antriebsräder und Stützrad mit Callipe](/images/foto_modell_a_calliope.jpg)
+![Beispielfahrzeug zwei Antriebsräder und Stützrad mit Calliope](/images/foto_modell_a_calliope.jpg)
 
 Für den ersten Prototyp nehme ich den Calliope und dessen integrierten Motortreiber. Das Fahrzeug hat zwei angetriebene Räder und ein Stützrad. Aufgrund der Einschränkungen des Calliope-Motortreibers gibt es leider keinen Rückwärtsgang.
 

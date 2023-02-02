@@ -1,0 +1,50 @@
+Microcontroller / Mini-PC
+- Raspi
+- ESP8266
+- ESP32
+- Raspi Pico
+- Calliope
+- Arduino
+
+Schnittstellen:
+- I2C
+- UART
+- SPI
+
+Sensoren
+- Schalter / Taster
+- Ultraschallsensor
+- Magnetfeldsensor
+- Farbsensor
+- Speedsensor
+- Beschleunigungssensor / Gyroskop
+- Schallsensor
+- Feuchtigkeitssensor
+- Mikrofon
+
+Aktoren
+- LED
+- Neopixel
+- Motor
+- Servo
+- Dynamixel-Motoren
+
+Sonstige Hardware
+- SD-Card
+- Breadboard Stromversorgung
+
+Software
+- Micropython
+
+Projekte
+- Fahrzeuge
+- WLED
+- Cowsay
+- static side Generactor
+    - Jekyll
+    - Hugo
+    - Pelican
+
+
+Lego
+Fischertechnik
