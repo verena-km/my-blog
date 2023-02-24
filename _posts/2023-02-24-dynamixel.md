@@ -48,7 +48,7 @@ Es erscheint ein Einrichtungsassistent, bei dem man Installationsordner auswähl
 
 Mit Klicken auf Scan kann man prüfen, welche Motoren angeschlossen sind, sie werden dann links angezeigt. Unter Options - Scan kann man den zu scannenden Bereich auf bestimmte Baudraten eingschränken.
 
-![Screenshot Dynamixel Wizzard](screenshot_dynamixel_wizard.png)
+![Screenshot Dynamixel Wizzard](/images/screenshot_dynamixel_wizard.png)
 
 In der Mitte sieht man dann die "ControlTable". Das sind Speicherbereiche im EEPROM und im RAM des jeweiligen Motors. Klickt man diese an erhält man rechts unten entsprechende Details und kann diese dort ggf. ändern. Änderungen im EEPROM überdauern das Ausschalten, Änderungen im RAM sind flüchtig.
 
