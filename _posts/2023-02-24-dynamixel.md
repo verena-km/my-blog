@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Dynamixel Motoren"
-date:   2022-11-06
+date:   2023-02-24
 tags: Motor Dynamixel
 ---
 
@@ -15,14 +15,12 @@ Angesteuert werden können die Dynamixel-Motoren mit einem PC oder einem Microco
 
 Für die Ansteuerung mit einem PC kann man den U2D2-Adapter von Robotis verwenden. Für die Ansteuerung mit Microcontrollern gibt es mehrere Möglichkeiten:
 - mit speziellen Shields (z.B. Dynamixel Shield für Arduino)
-- über einen 
+- über einen ...
 - direkt
 
-Ich verwende [Dynamixel vom Typ XL430-W250](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/).
+Ich verwende [Dynamixel vom Typ XL430-W250](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/). Diese benötigen Eine Spannungsversorgung zwischen 6,5 und 12 Volt. 
 
-Diese benötigen Eine Spannungsversorgung zwischen 6,5 un d12 Volt.
-
-Die Dynamixel-Motoren wird über das Senden und Empfangen von Datenpaketen über die serielle Schnittstelle programmiert. Das ist grundsätzlich mit allen Programmiersprachen möglich, das [Dynamixel SDK](https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/) enthält Basisfunktionen und Beispiele für folgende Programmiersprachen:
+Die Dynamixel-Motoren werden über das Senden und Empfangen von Datenpaketen über die serielle Schnittstelle programmiert. Das ist grundsätzlich mit allen Programmiersprachen möglich, das [Dynamixel SDK](https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/) enthält Basisfunktionen und Beispiele für folgende Programmiersprachen:
 * C, C++, C#
 * Python
 * Java

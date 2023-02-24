@@ -9,6 +9,9 @@ tags: Microcontroller
 
 Der Raspberry Pi Pico ist im Gegensatz zu den anderen Raspberry Pis kein Einplatinencomputer, sondern ein Microcontrollerboard wie der ESP32. Der Microcontroller ist vom Typ RP2040. Gegenüber dem ESP32 hat er allerdings den Nachteil, dass er nicht über WLAN und Bluetooth verfügt. Details zum Raspberry Pi Pico gibt es unter [https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html), im [Datasheet](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf) und [https://projects.raspberrypi.org/en/projects/getting-started-with-the-pico/0](https://projects.raspberrypi.org/en/projects/getting-started-with-the-pico/0)
 
+https://hackspace.raspberrypi.com/books/micropython-pico
+
+
 Viele ausführliche Infos auf deutsch gibt es auch beim [Elektronik-Kompendium](https://www.elektronik-kompendium.de/sites/raspberry-pi/2604131.htm).
 
 Der Raspberry Pi Pico kann in C/C++ oder in Micropython programmiert werden. 
