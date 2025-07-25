@@ -5,7 +5,7 @@ date:   2023-02-24
 tags: Motor Dynamixel
 ---
 
-Hinweis: Inhalt noch in Bearbeitung
+Hinweis: Inhalt immer noch in Bearbeitung
 
 Dynamixel sind Servo-Motoren der Firma Robotis, die besonders für Robotik-Projekte geeignet sind. Mehrere Dynamixel-Motoren können in Reihe geschaltet werden (sog. Daisy Chaining). Jeder der Motoren kann dann über eine eindeutige ID angesprochen werden. Die Kommunikation läuft über die serielle Schnittstelle UART TTL.
 
